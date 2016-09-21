@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/andela-efortune/Inverted-Index/issues"
   },
-  "homepage": "https://github.com/andela-efortune/Inverted-Index#readme"
+  "homepage": "https://github.com/andela-efortune/Inverted-Index#readme",
+  "devDependencies": {
+    "angular": "^1.5.8",
+    "gulp": "^3.9.1"
+  }
 }
