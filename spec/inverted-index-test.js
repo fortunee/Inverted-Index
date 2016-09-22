@@ -3,7 +3,7 @@
 describe("Iverted Index Object", function () {
   describe("Read book data", function () {
     it("should read json data", function () {
-        expect()
+        expect();
     });
 
     it("should not be empty", function () {
