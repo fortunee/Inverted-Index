@@ -1,4 +1,4 @@
- var index = require(./../src/js/inverted-index.js);
+'use strict';
 
 describe("Iverted Index Object", function () {
   describe("Read book data", function () {
