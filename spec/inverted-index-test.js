@@ -33,27 +33,4 @@ describe("Iverted Index Object", function () {
 
 
   });
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  \\\
-
-
-
-
-
-
 });
