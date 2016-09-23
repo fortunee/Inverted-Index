@@ -62,4 +62,28 @@ var Index = function() {
     this.indexedFiles[fileName] = indexedFileContents;
   };
 
+  /*
+   * Searches a particular file in the indexedFiles and returns an array of index where a search tokens are found
+   * @param{String} fileName - This specifies which you would like to search
+   * @param{String} queryString - This is the search query which is what is to be searched
+   */
+  this.searchFile = function(fileName, queryString) {
+    var that = this;
+
+    // Tokenize queryString as our indexed tokens
+    var queryTokens = that.tokenize(queryString);
+
+    // Check and compare
+    if (that.indexedFiles[fileName]) {
+      that.searchResults[fileName] = {};
+      queryTokens.forEach(function(qToken) {
+
+        if (that.indexedFiles[fileName][qToken]) {
+          that.searchResults[fileName][qToken] = that.indexedFiles[fileName][qToken];
+        }
+
+      });
+    }
+
+  };
 };
