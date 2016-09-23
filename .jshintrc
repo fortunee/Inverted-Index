@@ -7,5 +7,6 @@
   "undef":     false,
   "unused":    false,
   "onecase":   true,
-  "lastsemic": true
+  "lastsemic": true,
+  "jasmine" : true
 }

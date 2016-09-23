@@ -1,4 +1,4 @@
 *.*
 !src/js/app.js
 !src/js/inverted-index.js
-!spec/inverted-index.spec.js
+!spec/inverted-index-test.js
