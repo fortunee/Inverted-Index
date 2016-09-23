@@ -1,7 +1,6 @@
 'use strict';
 
-var books = [
-  {
+var books = [{
     "title": "Alice in Wonderland",
     "text": "Alice falls into a rabbit hole and enters a world full of imagination."
   },
@@ -12,44 +11,50 @@ var books = [
   }
 ];
 
-describe("Iverted Index Object", function () {
-  var index = new Index();
+var index = new Index();
 
-  describe("Read book data", function () {
+describe("Iverted Index Object", function() {
 
-    it("should not be empty", function () {
-        expect(index.tokenizedFiles.length > 0).toBeTruthy();
-    });
-  });
 
-  describe("Populate Index", function () {
+  describe("Read book data", function() {
 
-    beforeEach(function () {
+    beforeEach(function() {
       index.createIndex('books.json', books);
     });
 
-    it("should populate the index", function () {
-      expect(index.tokenizedFiles).toContain('books.json');
+    it("should not be empty", function() {
+      expect(fileContents.length).not.toEqual(0);
+    });
+  });
+
+  describe("Populate Index", function() {
+
+    beforeEach(function() {
+      index.createIndex('books.json', books);
     });
 
-    it("should verify that index is created", function () {
-      expect(index.tokenizedFiles.length > 0).toBeTruthy();
+    it("should populate the index", function() {
+      expect(index.indexedFiles['books.json']['alice']).toBeTruthy();
     });
 
-    it("should verify that keys are mapped to the correct docs", function () {
-      expect(index.tokenizedFiles["books.js"]["of"]).toEqual([0, 1]);
+    it("should verify that index is created", function() {
+      expect(index.indexedFiles['books.json']['alice']).toEqual([0]);
+    });
+
+    it("should verify that keys are mapped to the correct docs", function() {
+      expect(index.indexedFiles['books.json']['of']).toEqual([0, 1]);
     });
   });
 
 
-  describe("Search index", function () {
-    beforeEach(function () {
+  describe("Search index", function() {
+    beforeEach(function() {
       index.createIndex('books.json', books);
       index.searchIndex('books.json', "alice in Wonderland");
     });
 
-    it("should return an array of indices of the documents", function () {
-      expect(this.searchedResults["books.json"]["alice"]).toEqual([0]);
+    it("should return an array of indices of the documents", function() {
+      expect(this.searchedResults["books.json"].alice).toEqual([0]);
     });
 
 
