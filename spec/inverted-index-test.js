@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var books = [{
     "title": "Alice in Wonderland",
@@ -19,7 +19,7 @@ describe("Iverted Index Object", function() {
   describe("Read book data", function() {
 
     beforeEach(function() {
-      index.createIndex('books.json', books);
+      index.createIndex("books.json", books);
     });
 
     it("should not be empty", function() {
@@ -30,27 +30,27 @@ describe("Iverted Index Object", function() {
   describe("Populate Index", function() {
 
     beforeEach(function() {
-      index.createIndex('books.json', books);
+      index.createIndex("books.json", books);
     });
 
     it("should populate the index", function() {
-      expect(index.indexedFiles['books.json'].alice).toBeTruthy();
+      expect(index.indexedFiles["books.json"].alice).toBeTruthy();
     });
 
     it("should verify that index is created", function() {
-      expect(index.indexedFiles['books.json'].alice).toEqual([0]);
+      expect(index.indexedFiles["books.json"].alice).toEqual([0]);
     });
 
     it("should verify that keys are mapped to the correct docs", function() {
-      expect(index.indexedFiles['books.json'].of).toEqual([0, 1]);
+      expect(index.indexedFiles["books.json"].of).toEqual([0, 1]);
     });
   });
 
 
   describe("Search index", function() {
     beforeEach(function() {
-      index.createIndex('books.json', books);
-      index.searchIndex('books.json', "alice in Wonderland");
+      index.createIndex("books.json", books);
+      index.searchIndex("books.json", "alice in Wonderland");
     });
 
     it("should return an array of indices of the documents", function() {
