@@ -18,7 +18,7 @@ var Index = function() {
    * Returns an array of terms from the given strings
    * @param{String} str - String to be tokonized
    */
-  this.tokonize = function(str) {
+  this.tokenize = function(str) {
     return str.replace(/[.,\/#!$%\^&\*;:'{}=\-_`~()]/g, '').trim().toLowerCase().split(' ');
   };
 
@@ -32,10 +32,12 @@ var Index = function() {
     // This will contain the indexed file contents
     var indexedFileContents = {};
 
+    var that = this;
+
     fileContents.forEach(function(item, indexNum) {
 
-      var titleTokens = this.tokonize(item.title);
-      var textTokens = this.tokenize(item.text);
+      var titleTokens = that.tokenize(item.title);
+      var textTokens = that.tokenize(item.text);
 
       // Merged array of both titleTokens and textTokens
       var tokens = titleTokens.concat(textTokens);
