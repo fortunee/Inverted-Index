@@ -1,5 +1,5 @@
 'use strict';
-
+var books =
 describe("Iverted Index Object", function () {
 
   describe("Read book data", function () {
@@ -16,12 +16,14 @@ describe("Iverted Index Object", function () {
     });
 
     it("should populate the index", function () {
-      expect(index.tokenizedFiles.length === 0)toBeTruthy();
+
+      index.createIndex(docs);
+      expect(index.tokenizedFiles.length === 0).not.toBeTruthy();
     });
 
     it("should verify that index is created", function () {
       index.createIndex(docs);
-      expect(index.tokenizedFiles.length > 0).toBeTruthy;
+      expect(index.tokenizedFiles).toBeTruthy();
     });
 
     it("should verify that keys are mapped to the correct docs", function () {
