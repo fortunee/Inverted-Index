@@ -1,4 +1,3 @@
-*.*
-!src/js/app.js
-!src/js/inverted-index.js
-!spec/inverted-index-test.js
+node_modules/**/*.js
+spec/jasmine-2.3.3/*.js
+karma.conf.js
