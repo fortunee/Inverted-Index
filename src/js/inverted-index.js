@@ -89,6 +89,19 @@ var Index = function() {
 
   /*
    * This searches all files
-   * @param{String} fileName - The file name to be searched which could be all files
+   * @param{String} file - The file name to be searched which could be all files
+   * @param{String} queryString - The search query
    */
+  this.searchIndex = function(file, queryString) {
+
+    var that = this;
+
+    if (file === "all") {
+      Object.keys(that.indexedFiles).forEach(function(fileName) {
+        that.searchFile(fileName, queryString);
+      });
+    } else {
+      that.searchFile(file, queryString);
+    }
+  };
 };
