@@ -86,4 +86,9 @@ var Index = function() {
     }
 
   };
+
+  /*
+   * This searches all files
+   * @param{String} fileName - The file name to be searched which could be all files
+   */
 };
