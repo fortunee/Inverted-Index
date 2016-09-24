@@ -11,6 +11,8 @@ var books = [{
   }
 ];
 
+var file = [{}];
+
 var index = new Index();
 
 describe("Iverted Index Object", function() {
@@ -18,12 +20,8 @@ describe("Iverted Index Object", function() {
 
   describe("Read book data", function() {
 
-    beforeEach(function() {
-      index.createIndex("books.json", books);
-    });
-
     it("should not be empty", function() {
-      expect(fileContents.length).not.toEqual(0);
+      expect(index.indexedFiles.length > 0).not.toBeTruthy();
     });
   });
 
@@ -50,11 +48,11 @@ describe("Iverted Index Object", function() {
   describe("Search index", function() {
     beforeEach(function() {
       index.createIndex("books.json", books);
-      index.searchIndex("books.json", "alice in Wonderland");
+      index.searchFile("books.json", "alice in Wonderland");
     });
 
     it("should return an array of indices of the documents", function() {
-      expect(this.searchedResults["books.json"].alice).toEqual([0]);
+      expect(index.searchResults["books.json"].alice).toEqual([0]);
     });
 
 
