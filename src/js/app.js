@@ -11,7 +11,7 @@ var invertedIndex = angular.module("invertedIndex", [])
  * @param{String} ngFileUpload - Name of the custom directive
  * @param{Function} callback - callback for custom directive
  */
-.directive("ngFileUpload", function() {
+.directive("fileUpload", function() {
   var directive = {};
 
   // Restricts this directive to an HTML attribute
@@ -28,13 +28,25 @@ var invertedIndex = angular.module("invertedIndex", [])
     var uploadedFIle;
     var fileContents;
 
-    console.log(attributes);
+
     // Bind a change to the elememt
     element.bind('change', function(event) {
       uploadedFIle = event.target.files[0];
       console.log(uploadedFIle.name);
+
+      // Check if uploaded file was JSON
+      if (uploadedFIle.name.indexOf('json') !== -1) {
+        reader.readAsText(uploadedFIle);
+      } else {
+        console.log("This is not a JSON file");
+      }
     });
+
+    reader.onload = function(e) {
+      console.log(e.target.results);
+    };
   };
+  return directive;
 })
 
 /*
