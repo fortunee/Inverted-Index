@@ -44,9 +44,12 @@ var invertedIndex = angular.module("invertedIndex", [])
 
     reader.onload = function(e) {
       fileContents = e.target.result;
-      console.log(fileContents);
+      // console.log(fileContents);
 
-      // Set filecontents to the ngModel in order to be accessible with a scope controller
+      /*
+       * Set filecontents to the ngModel in order to be
+       * accessible with a scope controller
+       */
       ngModel.$setViewValue({
         name: upload.name,
         docs: scope.$eval(reader.result)
@@ -66,6 +69,23 @@ var invertedIndex = angular.module("invertedIndex", [])
  * @param{String} ivIndexCtrl - Name of the Controller
  * @param{function} callback - with Controller dependecies
  */
-.controller("ivIndexCtrl", function($scope) {
-  $scope.name = "fortune iyke";
+.controller("ivIndexCtrl", function($scope, $timeout) {
+
+  /*
+   * Instance of Index Object and indexedFiles set within
+   * the scope of the controller
+   */
+  var index = new Index();
+  $scope.indexedFiles = index.indexedFiles;
+  $scope.mappedContent = {};
+
+  $scope.verifyFileUpload = function() {
+    console.log($scope.file);
+
+    $timeout(function() {
+      $scope.mappedContent[$scope.file.name] = angular.copy($scope.file.docs);
+    });
+
+    console.log($scope.mappedContent);
+  };
 });

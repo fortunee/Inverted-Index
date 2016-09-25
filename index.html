@@ -43,7 +43,7 @@
         <div class="row">
             <!-- Uplaod buton -->
             <label class="btn btn-success btn-file col-md-2">
-        Upload <input type="file" style="display: none;" file-upload="json" ng-model="file" check-file-upload="verifyFileLoad()">
+        Upload <input type="file" style="display: none;" file-upload="json" ng-model="file" check-file-upload="verifyFileUpload()">
       </label>
             <!-- Uplaod buton ends -->
 
@@ -69,6 +69,20 @@
 
                 </div>
 
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row innerResultDisplay">
+
+                <!-- Uploaded files that is to be indexed -->
+                <div class="col-md-4">
+                    <div class="createIndex" ng-repeat="(key, value) in mappedContent">
+                        {{ key }}
+                        <button class="btn btn-info pull-right btn-createIndex" ng-click="">Create Index</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
