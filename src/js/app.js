@@ -25,26 +25,38 @@ var invertedIndex = angular.module("invertedIndex", [])
 
     // File reader instance for reading the JSON file
     var reader = new FileReader();
-    var uploadedFIle;
+    var upload;
     var fileContents;
 
 
     // Bind a change to the elememt
     element.bind('change', function(event) {
-      uploadedFIle = event.target.files[0];
-      console.log(uploadedFIle.name);
+      upload = event.target.files[0];
 
       // Check if uploaded file was JSON
-      if (uploadedFIle.name.indexOf('json') !== -1) {
-        reader.readAsText(uploadedFIle);
+      if (upload.name.indexOf('json') >= 0) {
+        var fileName = upload.name;
+        reader.readAsText(upload);
       } else {
         console.log("This is not a JSON file");
       }
     });
 
     reader.onload = function(e) {
-      console.log(e.target.results);
+      fileContents = e.target.result;
+      console.log(fileContents);
+
+      // Set filecontents to the ngModel in order to be accessible with a scope controller
+      ngModel.$setViewValue({
+        name: upload.name,
+        docs: scope.$eval(reader.result)
+      });
+
+      if (attributes.checkFileUpload) {
+        scope.$eval(attributes.checkFileUpload);
+      }
     };
+
   };
   return directive;
 })
