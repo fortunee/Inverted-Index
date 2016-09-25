@@ -20,15 +20,6 @@ body{
   padding-top: 10px;
 }
 
-.input-group-addon{
-  background-color: #39b3d7;
-  width: 30px;
-}
-
-.glyphicon-search{
-  color: white;
-}
-
 .createIndex{
   background: rgba(0, 0, 1, .5);
   color: #fff;

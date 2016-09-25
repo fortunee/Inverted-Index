@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <!-- Header & Navbar goes here-->
+    <!-- Header goes here-->
     <header>
         <nav class="navbar navbar-inverse navbar-static-top no-margin" role="navigation">
             <div class="container">
@@ -37,6 +37,41 @@
         </nav>
     </header>
     <!-- Header tag ends here -->
+
+    <!-- Upload button and search bar -->
+    <div class="container">
+        <div class="row">
+
+            <label class="btn btn-success btn-file col-md-2">
+        Upload <input type="file" style="display: none;">
+      </label>
+
+            <div class="col-md-10">
+
+                <div class="input-group">
+
+                    <input type="text" class="form-control">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Search
+                    <span class="caret"></span>
+                  </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">All files</a></li>
+                            <li><a href="#">File 1</a></li>
+                            <li><a href="#">File 2</a></li>
+                            <li><a href="#">File 3</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <!-- /btn-group -->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
     <!-- libs and dependencies -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
