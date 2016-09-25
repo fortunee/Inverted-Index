@@ -8,6 +8,8 @@ var invertedIndex = angular.module("invertedIndex", [])
 
 /*
  * File upload custom directive which handles the uploaded file
+ * @param{String} ngFileUpload - Name of the custom directive
+ * @param{Function} callback - callback for custom directive
  */
 .directive("ngFileUpload", function() {
   var directive = {};
@@ -33,4 +35,13 @@ var invertedIndex = angular.module("invertedIndex", [])
       console.log(uploadedFIle.name);
     });
   };
+})
+
+/*
+ * Controller for the inverted index
+ * @param{String} ivIndexCtrl - Name of the Controller
+ * @param{function} callback - with Controller dependecies
+ */
+.controller("ivIndexCtrl", function($scope) {
+  $scope.name = "fortune iyke";
 });
