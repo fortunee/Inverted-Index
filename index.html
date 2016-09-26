@@ -58,11 +58,7 @@
                   </button>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">All files</a></li>
-                            <li><a href="#">File 1</a></li>
-                            <li><a href="#">File 2</a></li>
-                            <li><a href="#">File 3</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
+                            <li ng-repeat="(key, value) in indexedFiles"><a href="#">{{ key }}</a></li>
                         </ul>
                     </div>
                     <!-- /btn-group -->
@@ -80,7 +76,7 @@
                 <div class="col-md-4">
                     <div class="createIndex" ng-repeat="(key, value) in mappedContent">
                         {{ key }}
-                        <button class="btn btn-info pull-right btn-createIndex" ng-click="">Create Index</button>
+                        <button class="btn btn-info pull-right btn-createIndex" ng-click="createIndex(key, value)">Create Index</button>
                     </div>
                 </div>
             </div>

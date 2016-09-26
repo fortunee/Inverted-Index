@@ -72,20 +72,33 @@ var invertedIndex = angular.module("invertedIndex", [])
 .controller("ivIndexCtrl", function($scope, $timeout) {
 
   /*
-   * Instance of Index Object and indexedFiles set within
-   * the scope of the controller
+   * Instance of Index Object and indexedFiles
    */
   var index = new Index();
-  $scope.indexedFiles = index.indexedFiles;
+
+
+  // Keeps track of uploaded files as wells their names
   $scope.mappedContent = {};
 
   $scope.verifyFileUpload = function() {
-    console.log($scope.file);
+    // console.log($scope.file);
 
+    // Copies the name and JSON docs to mappedContent
     $timeout(function() {
       $scope.mappedContent[$scope.file.name] = angular.copy($scope.file.docs);
     });
+    // console.log($scope.mappedContent);
 
-    console.log($scope.mappedContent);
+
+    /*
+     * Create index function
+     * @param{String} fileName - Name of current JSON file
+     * @param{String} docs - An array of JSON documents
+     */
+    $scope.createIndex = function(fileName, docs) {
+      index.createIndex(fileName, docs);
+      $scope.indexedFiles = index.indexedFiles;
+      console.log($scope.indexedFiles);
+    };
   };
 });
