@@ -25,17 +25,29 @@ var Index = function() {
   /*
    * Creates the index of a JSON file and updates it in the indexedFiles
    * @param{String} fileName - The name of the JSON file that is to be created
-   * @param{String} fileContents - The contents of the JSON file that is to be created
+   * @param{Array} fileContents - The contents of the JSON file that is to be created
    */
   this.createIndex = function(fileName, fileContents) {
 
     // This will contain the indexed file contents
-    var indexedFileContents = {};
+    var indexedFileContents = {
+      indexMap: {}
+    };
+
+    // Gets index number of each document in the JSON object
+    indexedFileContents.documentsId = (function() {
+      var documents = [];
+      for (var i = 0; i < fileContents.length; i++) {
+        documents.push(i);
+      }
+      return documents;
+    })();
 
     var that = this;
 
     fileContents.forEach(function(item, indexNum) {
 
+      // Tokenize both title and text
       var titleTokens = that.tokenize(item.title);
       var textTokens = that.tokenize(item.text);
 
@@ -50,16 +62,16 @@ var Index = function() {
       // Set each token as a property indexedFileContents with array value
       // of index number where they appear.
       tokens.forEach(function(token) {
-        if (!indexedFileContents.hasOwnProperty(token)) {
-          indexedFileContents[token] = [indexNum];
+        if (!indexedFileContents.indexMap.hasOwnProperty(token)) {
+          indexedFileContents.indexMap[token] = [indexNum];
         } else {
-          indexedFileContents[token].push(indexNum);
+          indexedFileContents.indexMap[token].push(indexNum);
         }
       });
     });
 
     // Update the indexed files records
-    this.indexedFiles[fileName] = indexedFileContents;
+    that.indexedFiles[fileName] = indexedFileContents;
   };
 
   /*
@@ -75,11 +87,14 @@ var Index = function() {
 
     // Check and compare
     if (that.indexedFiles[fileName]) {
+
+      // Initialize the search result the current file with JSON name as the key
       that.searchResults[fileName] = {};
+
       queryTokens.forEach(function(qToken) {
 
-        if (that.indexedFiles[fileName][qToken]) {
-          that.searchResults[fileName][qToken] = that.indexedFiles[fileName][qToken];
+        if (that.indexedFiles[fileName].indexMap[qToken]) {
+          that.searchResults[fileName][qToken] = that.indexedFiles[fileName].indexMap[qToken];
         }
 
       });

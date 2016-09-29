@@ -1,25 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="invertedIndex" lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Inverted Index</title>
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css" />
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inverted Index</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
 
-  <link rel="stylesheet" href="src/css/style.css" />
+    <link rel="stylesheet" href="src/css/style.css" />
 
-  <!-- Angular -->
-  <script src="/node_modules/angular/angular.js"></script>
-  <script src="/src/js/app.js"></script>
+    <!-- Angular -->
+    <script src="/node_modules/angular/angular.js"></script>
+    <script src="/src/js/app.js"></script>
 </head>
-<body>
 
-  <!-- libs and dependencies -->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
-  <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-  <script src="src/js/inverted-index.js"></script>
+<body>
+    <!-- Header goes here-->
+    <header>
+        <nav class="navbar navbar-inverse navbar-static-top no-margin" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mobile-display" aria-expanded="false">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                </button>
+                    <a href="/" class="navbar-brand">
+                        <strong id="logo"><em>Inverted</em>Index</strong>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Header tag ends here -->
+
+    <!-- Upload button and search bar -->
+    <div class="container" ng-controller="ivIndexCtrl">
+        <div class="row">
+            <!-- Uplaod buton -->
+            <label class="btn btn-success btn-file col-md-2">
+        Upload <input type="file" style="display: none;" file-upload="json" ng-model="file" check-file-upload="verifyFileUpload()">
+      </label>
+            <!-- Uplaod buton ends -->
+
+            <div class="col-md-10">
+
+                <div class="input-group">
+
+                    <input type="text" class="form-control">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Search
+                    <span class="caret"></span>
+                  </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">All files</a></li>
+                            <li ng-repeat="(key, value) in indexedFiles"><a href="#">{{ key }}</a></li>
+                        </ul>
+                    </div>
+                    <!-- /btn-group -->
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row innerResultDisplay">
+
+                <!-- Uploaded files that is to be indexed -->
+                <div class="col-md-4">
+                    <div class="createIndex" ng-repeat="(key, value) in mappedContent">
+                        {{ value.name }}
+                        <button class="btn btn-info pull-right btn-createIndex" ng-click="createIndex(value.name, value.docs)">Create Index</button>
+                    </div>
+                </div>
+
+                <!-- indexed files view -->
+                <div class="col-md-8 builtIndex" ng-show="indexedFiles">
+
+                    <div class="" ng-repeat="(name, indexed) in indexedFiles">
+                        <h4 class="text-center">{{ name }} </h4>
+                        <table class="table">
+
+                            <thead>
+                                <th>Terms</th>
+                                <th ng-repeat="id in indexed.documentsId">DOC {{ id }}</th>
+                            </thead>
+
+                            <tbody>
+                                <tr ng-repeat="(term, sourceIndexes) in indexed.indexMap">
+                                    <td>{{ term }} {{ sourceIndexes }}</td>
+                                    <td ng-repeat="(key, val) in indexed.documentsId">
+                                        {{sourceIndexes.includes(val) ? 'YES': 'NO'}}
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <hr>
+    <footer class="text-center footerstyle">
+        <p>&copy; 2016 invertedIndex, Inc.</p>
+    </footer>
+
+    <!-- libs and dependencies -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="src/js/inverted-index.js"></script>
 </body>
+
 </html>
