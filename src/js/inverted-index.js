@@ -120,20 +120,3 @@ var Index = function() {
     }
   };
 };
-
-var books = [{
-    "title": "Alice in Wonderland",
-    "text": "Alice falls into a rabbit hole and enters a world full of imagination."
-  },
-
-  {
-    "title": "The Lord of the Rings: The Fellowship of the Ring.",
-    "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
-  }
-];
-
-var index = new Index();
-index.createIndex("books.json", books);
-console.log(index.indexedFiles);
-index.searchFile("all", "alice of");
-console.log(index.searchResults);
