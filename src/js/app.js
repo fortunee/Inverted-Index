@@ -76,18 +76,21 @@ var invertedIndex = angular.module("invertedIndex", [])
    */
   var index = new Index();
 
-
   // Keeps track of uploaded files as wells their names
   $scope.mappedContent = {};
+  $scope.docsId = [];
 
   $scope.verifyFileUpload = function() {
     // console.log($scope.file);
 
     // Copies the name and JSON docs to mappedContent
     $timeout(function() {
-      $scope.mappedContent[$scope.file.name] = angular.copy($scope.file.docs);
+      $scope.mappedContent[$scope.file.name] = angular.copy($scope.file);
+      // console.log(Object.keys($scope.file.docs));
+
+
     });
-    // console.log($scope.mappedContent);
+    console.log($scope.mappedContent);
 
 
     /*
@@ -98,7 +101,14 @@ var invertedIndex = angular.module("invertedIndex", [])
     $scope.createIndex = function(fileName, docs) {
       index.createIndex(fileName, docs);
       $scope.indexedFiles = index.indexedFiles;
+      // $scope.docsId = index.indexedFiles[fileName].documentsId;
       console.log($scope.indexedFiles);
+
+      // $scope.filter = function(){
+      //
+      // };
     };
   };
+
+
 });

@@ -35,7 +35,7 @@ body{
 }
 
 .builtIndex{
-  max-height: 350px;
+  max-height: 490px;
   overflow: auto;
   background: rgba(0, 0, 1, .5);
   color: #fff;

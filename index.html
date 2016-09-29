@@ -75,8 +75,33 @@
                 <!-- Uploaded files that is to be indexed -->
                 <div class="col-md-4">
                     <div class="createIndex" ng-repeat="(key, value) in mappedContent">
-                        {{ key }}
-                        <button class="btn btn-info pull-right btn-createIndex" ng-click="createIndex(key, value)">Create Index</button>
+                        {{ value.name }}
+                        <button class="btn btn-info pull-right btn-createIndex" ng-click="createIndex(value.name, value.docs)">Create Index</button>
+                    </div>
+                </div>
+
+                <!-- indexed files view -->
+                <div class="col-md-8 builtIndex" ng-show="indexedFiles">
+
+                    <div class="" ng-repeat="(name, indexed) in indexedFiles">
+                        <h4 class="text-center">{{ name }} </h4>
+                        <table class="table">
+
+                            <thead>
+                                <th>Terms</th>
+                                <th ng-repeat="id in indexed.documentsId">DOC {{ id }}</th>
+                            </thead>
+
+                            <tbody>
+                                <tr ng-repeat="(term, sourceIndexes) in indexed.indexMap">
+                                    <td>{{ term }} {{ sourceIndexes }}</td>
+                                    <td ng-repeat="(key, val) in indexed.documentsId">
+                                        {{sourceIndexes.includes(val) ? 'YES': 'NO'}}
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
                     </div>
                 </div>
             </div>
