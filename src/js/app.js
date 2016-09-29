@@ -91,24 +91,20 @@ var invertedIndex = angular.module("invertedIndex", [])
 
     });
     console.log($scope.mappedContent);
-
-
-    /*
-     * Create index function
-     * @param{String} fileName - Name of current JSON file
-     * @param{String} docs - An array of JSON documents
-     */
-    $scope.createIndex = function(fileName, docs) {
-      index.createIndex(fileName, docs);
-      $scope.indexedFiles = index.indexedFiles;
-      // $scope.docsId = index.indexedFiles[fileName].documentsId;
-      console.log($scope.indexedFiles);
-
-      // $scope.filter = function(){
-      //
-      // };
-    };
   };
 
+
+
+  /*
+   * Create index function
+   * @param{String} fileName - Name of current JSON file
+   * @param{String} docs - An array of JSON documents
+   */
+  $scope.createIndex = function(fileName, docs) {
+    index.createIndex(fileName, docs);
+    $scope.indexedFiles = index.indexedFiles;
+    // $scope.docsId = index.indexedFiles[fileName].documentsId;
+    console.log($scope.indexedFiles);
+  };
 
 });
