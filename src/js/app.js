@@ -86,14 +86,10 @@ var invertedIndex = angular.module("invertedIndex", [])
     // Copies the name and JSON docs to mappedContent
     $timeout(function() {
       $scope.mappedContent[$scope.file.name] = angular.copy($scope.file);
-      // console.log(Object.keys($scope.file.docs));
-
 
     });
     console.log($scope.mappedContent);
   };
-
-
 
   /*
    * Create index function
@@ -103,7 +99,6 @@ var invertedIndex = angular.module("invertedIndex", [])
   $scope.createIndex = function(fileName, docs) {
     index.createIndex(fileName, docs);
     $scope.indexedFiles = index.indexedFiles;
-    // $scope.docsId = index.indexedFiles[fileName].documentsId;
     console.log($scope.indexedFiles);
   };
 
