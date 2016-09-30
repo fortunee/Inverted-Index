@@ -19,15 +19,15 @@ describe("Iverted Index Object", function() {
     });
 
     it("should populate the index", function() {
-      expect(index.indexedFiles["books.json"].alice).toBeTruthy();
+      expect(index.indexedFiles["books.json"].indexMap.alice).toBeTruthy();
     });
 
     it("should verify that index is created", function() {
-      expect(index.indexedFiles["books.json"].alice).toEqual([0, 1, 2]);
+      expect(index.indexedFiles["books.json"].indexMap.alice).toEqual([0, 1, 2]);
     });
 
     it("should verify that keys are mapped to the correct docs", function() {
-      expect(index.indexedFiles["books.json"].of).toEqual([0, 1, 2]);
+      expect(index.indexedFiles["books.json"].indexMap.of).toEqual([0, 1, 2]);
     });
   });
 
@@ -40,7 +40,7 @@ describe("Iverted Index Object", function() {
     });
 
     it("should return an array of indices of the documents", function() {
-      expect(index.searchResults["books.json"].alice).toEqual([0, 1, 2]);
+      expect(index.searchResults["books.json"].indexMap.alice).toEqual([0, 1, 2]);
     });
 
 
