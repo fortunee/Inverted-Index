@@ -50,15 +50,14 @@
             <div class="col-md-10">
 
                 <div class="input-group">
-
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="query">
                     <div class="input-group-btn">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Search
                     <span class="caret"></span>
                   </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">All files</a></li>
-                            <li ng-repeat="(key, value) in indexedFiles"><a href="#">{{ key }}</a></li>
+                            <li><a ng-click="searchIndex('all', query)">All files</a></li>
+                            <li ng-repeat="(key, value) in indexedFiles" ng-click="searchIndex(key, query)"><a href="#">{{ key }}</a></li>
                         </ul>
                     </div>
                     <!-- /btn-group -->
@@ -84,19 +83,19 @@
                 <div class="col-md-8 builtIndex" ng-show="indexedFiles">
 
                     <div class="" ng-repeat="(name, indexed) in indexedFiles">
-                        <h4 class="text-center">{{ name }} </h4>
+                        <h4 class="text-center">{{ name | uppercase }} </h4>
                         <table class="table">
 
                             <thead>
-                                <th>Terms</th>
+                                <th>TERMS</th>
                                 <th ng-repeat="id in indexed.documentsId">DOC {{ id }}</th>
                             </thead>
 
                             <tbody>
-                                <tr ng-repeat="(term, sourceIndexes) in indexed.indexMap">
-                                    <td>{{ term }} {{ sourceIndexes }}</td>
+                                <tr ng-repeat="(term, sourceIndexNums) in indexed.indexMap">
+                                    <td>{{ term }} {{ sourceIndexNums }}</td>
                                     <td ng-repeat="(key, val) in indexed.documentsId">
-                                        {{sourceIndexes.includes(val) ? 'YES': 'NO'}}
+                                        {{sourceIndexNums.includes(val) ? 'YES': 'NO'}}
                                     </td>
                                 </tr>
                             </tbody>
