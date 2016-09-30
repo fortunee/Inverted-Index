@@ -94,12 +94,23 @@ var invertedIndex = angular.module("invertedIndex", [])
   /*
    * Create index function
    * @param{String} fileName - Name of current JSON file
-   * @param{String} docs - An array of JSON documents
+   * @param{Array} docs - An array of JSON documents
    */
   $scope.createIndex = function(fileName, docs) {
     index.createIndex(fileName, docs);
     $scope.indexedFiles = index.indexedFiles;
     console.log($scope.indexedFiles);
+  };
+
+  /*
+   * Search Index function
+   * @param{String} file -The file(s) to be searched
+   * @param{String} queryString -The search query
+   */
+  $scope.searchIndex = function(file, queryString) {
+    index.searchIndex(file, queryString);
+    $scope.searchResults = index.searchResults;
+    console.log($scope.searchResults);
   };
 
 });
