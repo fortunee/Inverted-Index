@@ -86,25 +86,30 @@ var invertedIndex = angular.module("invertedIndex", [])
     // Copies the name and JSON docs to mappedContent
     $timeout(function() {
       $scope.mappedContent[$scope.file.name] = angular.copy($scope.file);
-      // console.log(Object.keys($scope.file.docs));
-
-
     });
     console.log($scope.mappedContent);
   };
 
-
-
   /*
    * Create index function
    * @param{String} fileName - Name of current JSON file
-   * @param{String} docs - An array of JSON documents
+   * @param{Array} docs - An array of JSON documents
    */
   $scope.createIndex = function(fileName, docs) {
     index.createIndex(fileName, docs);
     $scope.indexedFiles = index.indexedFiles;
-    // $scope.docsId = index.indexedFiles[fileName].documentsId;
     console.log($scope.indexedFiles);
+  };
+
+  /*
+   * Search Index function
+   * @param{String} file -The file(s) to be searched
+   * @param{String} queryString -The search query
+   */
+  $scope.searchIndex = function(file, queryString) {
+    index.searchIndex(file, queryString);
+    $scope.searchResults = index.searchResults;
+    console.log($scope.searchResults);
   };
 
 });

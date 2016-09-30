@@ -5,7 +5,6 @@
  * It creates an index of the contents of a json file
  * It searches through the created index
  */
-
 var Index = function() {
 
   // This will contain the indexed JSON files
@@ -43,13 +42,12 @@ var Index = function() {
       return documents;
     })();
 
-    var that = this;
 
     fileContents.forEach(function(item, indexNum) {
 
       // Tokenize both title and text
-      var titleTokens = that.tokenize(item.title);
-      var textTokens = that.tokenize(item.text);
+      var titleTokens = this.tokenize(item.title);
+      var textTokens = this.tokenize(item.text);
 
       // Merged array of both titleTokens and textTokens
       var tokens = titleTokens.concat(textTokens);
@@ -68,10 +66,10 @@ var Index = function() {
           indexedFileContents.indexMap[token].push(indexNum);
         }
       });
-    });
+    }.bind(this));
 
     // Update the indexed files records
-    that.indexedFiles[fileName] = indexedFileContents;
+    this.indexedFiles[fileName] = indexedFileContents;
   };
 
   /*
@@ -80,24 +78,26 @@ var Index = function() {
    * @param{String} queryString - This is the search query which is what is to be searched
    */
   this.searchFile = function(fileName, queryString) {
-    var that = this;
 
     // Tokenize queryString as our indexed tokens
-    var queryTokens = that.tokenize(queryString);
+    var queryTokens = this.tokenize(queryString);
 
     // Check and compare
-    if (that.indexedFiles[fileName]) {
+    if (this.indexedFiles[fileName]) {
 
       // Initialize the search result the current file with JSON name as the key
-      that.searchResults[fileName] = {};
+      this.searchResults[fileName] = {
+        indexMap: {},
+        documentsId: this.indexedFiles[fileName].documentsId
+      };
+
 
       queryTokens.forEach(function(qToken) {
-
-        if (that.indexedFiles[fileName].indexMap[qToken]) {
-          that.searchResults[fileName][qToken] = that.indexedFiles[fileName].indexMap[qToken];
+        if (this.indexedFiles[fileName].indexMap[qToken]) {
+          this.searchResults[fileName].indexMap[qToken] = this.indexedFiles[fileName].indexMap[qToken];
         }
 
-      });
+      }.bind(this));
     }
 
   };
@@ -109,14 +109,14 @@ var Index = function() {
    */
   this.searchIndex = function(file, queryString) {
 
-    var that = this;
+    // var that = this;
 
     if (file === "all") {
-      Object.keys(that.indexedFiles).forEach(function(fileName) {
-        that.searchFile(fileName, queryString);
-      });
+      Object.keys(this.indexedFiles).forEach(function(fileName) {
+        this.searchFile(fileName, queryString);
+      }.bind(this));
     } else {
-      that.searchFile(file, queryString);
+      this.searchFile(file, queryString);
     }
   };
 };
