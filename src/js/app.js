@@ -86,7 +86,6 @@ var invertedIndex = angular.module("invertedIndex", [])
     // Copies the name and JSON docs to mappedContent
     $timeout(function() {
       $scope.mappedContent[$scope.file.name] = angular.copy($scope.file);
-
     });
     console.log($scope.mappedContent);
   };

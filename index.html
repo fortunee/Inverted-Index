@@ -84,8 +84,9 @@
 
                     <div class="" ng-repeat="(name, indexed) in indexedFiles">
                         <h4 class="text-center">{{ name | uppercase }} </h4>
-                        <table class="table">
 
+                        <!-- created index table  -->
+                        <table class="table">
                             <thead>
                                 <th>TERMS</th>
                                 <th ng-repeat="id in indexed.documentsId">DOC {{ id }}</th>
@@ -99,12 +100,47 @@
                                     </td>
                                 </tr>
                             </tbody>
-
                         </table>
+                        <!-- /created index table -->
                     </div>
                 </div>
+                <!-- /indexed files view -->
             </div>
+            <!-- /innerResultDisplay -->
         </div>
+        <!-- /container -->
+
+        <!-- <div class="container"> -->
+            <div class="row innerResultDisplay">
+                <!-- Search Result view -->
+                <div class="col-md-12 builtIndex" ng-show="searchResults">
+
+                    <div class="" ng-repeat="(name, indexed) in searchResults">
+                        <h4 class="text-center">SEARCH RESULTS FOR {{ name | uppercase }} </h4>
+                        <!-- search index results table  -->
+                        <table class="table">
+                            <thead>
+                                <th>TERMS</th>
+                                <th ng-repeat="id in indexed.documentsId">DOC {{ id }}</th>
+                            </thead>
+
+                            <tbody>
+                                <tr ng-repeat="(term, sourceIndexNums) in indexed.indexMap">
+                                    <td>{{ term }} {{ sourceIndexNums }}</td>
+                                    <td ng-repeat="(key, val) in indexed.documentsId">
+                                        {{sourceIndexNums.includes(val) ? 'YES': 'NO'}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- /search index results table -->
+                    </div>
+                </div>
+                <!-- /Search Result view -->
+            </div>
+        <!-- </div> -->
+
+
     </div>
 
     <!-- Footer -->
