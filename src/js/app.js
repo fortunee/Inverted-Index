@@ -44,7 +44,6 @@ var invertedIndex = angular.module("invertedIndex", [])
 
     reader.onload = function(e) {
       fileContents = e.target.result;
-      // console.log(fileContents);
 
       /*
        * Set filecontents to the ngModel in order to be

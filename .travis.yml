@@ -9,4 +9,4 @@ script: npm test
 before_script:
     - npm install
 
-after_success: 'npm run coveralls'
+after_script: 'coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls'

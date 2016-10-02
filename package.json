@@ -4,8 +4,7 @@
   "description": "A simple inverted index application",
   "main": "app.js",
   "scripts": {
-    "test": "node_modules/karma/bin/karma start karma.conf.js --single-run",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
+    "test": "node_modules/karma/bin/karma start karma.conf.js --single-run"
   },
   "repository": {
     "type": "git",
