@@ -10,3 +10,4 @@ before_script:
     - npm install
 
 after_script: 'coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls'
+repo_token: dQZpsA3sigpUVdbwke2kWw7IboitstjNk
