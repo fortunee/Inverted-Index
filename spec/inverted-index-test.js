@@ -12,6 +12,13 @@ describe("Iverted Index Object", function() {
     });
   });
 
+  describe("Tokenize words", function() {
+    var str = "Hello world, this is ALL";
+    it("Should return and array of words passed to it", function () {
+      expect(index.tokenize(str)).toEqual(["hello","world","this","is","all"]);
+    });
+  });
+
   describe("Populate Index", function() {
 
     beforeEach(function() {
