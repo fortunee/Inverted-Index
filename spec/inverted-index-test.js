@@ -92,6 +92,21 @@ describe("Iverted Index Object", function() {
   });
 
   /*
+   * Test suite to ensure the getIndex method returns an object of
+   * the correct index mapping
+   */
+  describe("Get index", function () {
+
+    beforeEach(function() {
+      index.createIndex("books.json", books);
+    });
+
+    it("should verify that the correct object of index map is returned", function() {
+      expect(index.getIndex("books.json")).not.toBe(null);
+    });
+  });
+
+  /*
    * Test suite to ensure the search index can search all
    * uploaded JSON files or a particular file provide "all"
    * or a file name is passed and returns an array of indices
