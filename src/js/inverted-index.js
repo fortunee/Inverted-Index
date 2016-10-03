@@ -57,7 +57,7 @@ var Index = function() {
         titleTokens = this.tokenize(item.title);
         textTokens = this.tokenize(item.text);
       } else {
-        return alert("Document " + indexNum + ": Invalid JSON document. It should have text and title");
+        return alert("Document " + indexNum + ":  Invalid JSON document. It should have text and title");
       }
 
 
@@ -86,6 +86,15 @@ var Index = function() {
   };
 
   /*
+   * The getIndex method returns an object of the correct
+   * index mapping
+   * @param{String} fileName - fileName in which the index map is to be returned
+   */
+  this.getIndex = function(fileName) {
+    return this.indexedFiles[fileName].indexMap;
+  };
+
+  /*
    * Searches a particular file in the indexedFiles and returns an
    * array of index where a search tokens are found
    * @param{String} fileName - This specifies which you would like to search
@@ -109,6 +118,8 @@ var Index = function() {
       queryTokens.forEach(function(qToken) {
         if (this.indexedFiles[fileName].indexMap[qToken]) {
           this.searchResults[fileName].indexMap[qToken] = this.indexedFiles[fileName].indexMap[qToken];
+        } else {
+          return console.log(qToken + " is not found anywhere");
         }
 
       }.bind(this));
@@ -118,7 +129,7 @@ var Index = function() {
 
   /*
    * This searches all files
-   * @param{String} file - The file name to be searched which could be all files
+   * @param{String} file - The file name to be searched which could be "all"
    * @param{String} queryString - The search query
    */
   this.searchIndex = function(file, queryString) {

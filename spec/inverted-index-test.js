@@ -84,6 +84,27 @@ describe("Iverted Index Object", function() {
     it("should verify that keys are mapped to the correct docs", function() {
       expect(index.indexedFiles["books.json"].indexMap.of).toEqual([0, 1, 2]);
     });
+
+    it("should verify that documents indices are populated into documentsId", function() {
+      expect(index.indexedFiles["books.json"].documentsId).toBeTruthy();
+      expect(index.indexedFiles["books.json"].documentsId.length).toEqual(3);
+    });
+  });
+
+  /*
+   * Test suite to ensure the getIndex method returns an object of
+   * the correct index mapping
+   */
+  describe("Get index", function () {
+
+    beforeEach(function() {
+      index.createIndex("books.json", books);
+    });
+
+    it("should verify that the correct object of index map is returned", function() {
+      expect(index.getIndex("books.json")).not.toBe(null);
+      expect(typeof index.getIndex("books.json")).toBe("object");
+    });
   });
 
   /*
