@@ -30,11 +30,11 @@ var invertedIndex = angular.module("invertedIndex", [])
 
 
     // Bind a change to the elememt
-    element.bind('change', function(event) {
+    element.bind("change", function(event) {
       upload = event.target.files[0];
 
       // Check if uploaded file was JSON
-      if (upload.name.indexOf('json') >= 0) {
+      if (upload.name.indexOf("json") >= 0) {
         var fileName = upload.name;
         reader.readAsText(upload);
       } else {

@@ -77,7 +77,8 @@ describe("Iverted Index Object", function() {
     });
 
     it("should verify that index is created", function() {
-      expect(index.indexedFiles["books.json"].indexMap.alice).toEqual([0, 1, 2]);
+      expect(index.indexedFiles["books.json"].indexMap.alice)
+        .toEqual([0, 1, 2]);
     });
 
     it("should verify that keys are mapped to the correct docs", function() {
