@@ -103,6 +103,7 @@ describe("Iverted Index Object", function() {
 
     it("should verify that the correct object of index map is returned", function() {
       expect(index.getIndex("books.json")).not.toBe(null);
+      expect(typeof index.getIndex("books.json")).toBe("object");
     });
   });
 
