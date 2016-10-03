@@ -118,6 +118,8 @@ var Index = function() {
       queryTokens.forEach(function(qToken) {
         if (this.indexedFiles[fileName].indexMap[qToken]) {
           this.searchResults[fileName].indexMap[qToken] = this.indexedFiles[fileName].indexMap[qToken];
+        } else {
+          return console.log(qToken + " is not found anywhere");
         }
 
       }.bind(this));
@@ -127,7 +129,7 @@ var Index = function() {
 
   /*
    * This searches all files
-   * @param{String} file - The file name to be searched which could be all files
+   * @param{String} file - The file name to be searched which could be "all"
    * @param{String} queryString - The search query
    */
   this.searchIndex = function(file, queryString) {
