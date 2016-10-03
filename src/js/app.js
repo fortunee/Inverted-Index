@@ -38,7 +38,7 @@ var invertedIndex = angular.module("invertedIndex", [])
         var fileName = upload.name;
         reader.readAsText(upload);
       } else {
-        console.log("This is not a JSON file");
+        alert("This is not a JSON file. Please try again");
       }
     });
 
