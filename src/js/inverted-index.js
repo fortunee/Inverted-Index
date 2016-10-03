@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /*
  * Index Class
@@ -7,18 +7,18 @@
  */
 var Index = function() {
 
-  // This will contain the indexed JSON files
+  /* This will keep track of the indexed JSON files */
   this.indexedFiles = {};
 
-  // This will contain the search results
+  /* This will contain the search results */
   this.searchResults = {};
 
   /*
-   * Returns an array of terms from the given strings
+   * Returns an array of terms/words from the given strings
    * @param{String} str - String to be tokonized
    */
   this.tokenize = function(str) {
-    return str.replace(/[.,\/#!$%\^&\*;:'{}=\-_`~()]/g, '').trim().toLowerCase().split(' ');
+    return str.replace(/[.,\/#!$%\^&\*;:'{}=\-_`~()]/g, "").trim().toLowerCase().split(" ");
   };
 
   /*
@@ -28,12 +28,12 @@ var Index = function() {
    */
   this.createIndex = function(fileName, fileContents) {
 
-    // This will contain the indexed file contents
+    /* This will contain the indexed file contents */
     var indexedFileContents = {
       indexMap: {}
     };
 
-    // Gets index number of each document in the JSON object
+    /* Gets index number of each document in the JSON object */
     indexedFileContents.documentsId = (function() {
       var documents = [];
       for (var i = 0; i < fileContents.length; i++) {
@@ -45,20 +45,33 @@ var Index = function() {
 
     fileContents.forEach(function(item, indexNum) {
 
-      // Tokenize both title and text
-      var titleTokens = this.tokenize(item.title);
-      var textTokens = this.tokenize(item.text);
+      var titleTokens;
+      var textTokens;
 
-      // Merged array of both titleTokens and textTokens
+      /*
+       * Check if each document in the JSON file
+       * has a title and text.
+       */
+      if (item.title && item.text) {
+        /* Tokenize both title and text */
+        titleTokens = this.tokenize(item.title);
+        textTokens = this.tokenize(item.text);
+      } else {
+        return alert("Document " + indexNum + ": Invalid JSON document. It should have text and title");
+      }
+
+
+      /* Merged array of both titleTokens and textTokens */
       var tokens = titleTokens.concat(textTokens);
 
-      // FIlter Merged array to order and get unique words
+      /* FIlter Merged array to order and get unique words */
       tokens = tokens.filter(function(token, pos) {
         return tokens.indexOf(token) === pos;
       });
 
-      // Set each token as a property indexedFileContents with array value
-      // of index number where they appear.
+      /* Set each token as a property indexedFileContents with array value
+       * of index number where they appear.
+       */
       tokens.forEach(function(token) {
         if (!indexedFileContents.indexMap.hasOwnProperty(token)) {
           indexedFileContents.indexMap[token] = [indexNum];
@@ -68,24 +81,25 @@ var Index = function() {
       });
     }.bind(this));
 
-    // Update the indexed files records
+    /* Update the indexed files records */
     this.indexedFiles[fileName] = indexedFileContents;
   };
 
   /*
-   * Searches a particular file in the indexedFiles and returns an array of index where a search tokens are found
+   * Searches a particular file in the indexedFiles and returns an
+   * array of index where a search tokens are found
    * @param{String} fileName - This specifies which you would like to search
    * @param{String} queryString - This is the search query which is what is to be searched
    */
   this.searchFile = function(fileName, queryString) {
 
-    // Tokenize queryString as our indexed tokens
+    /* Tokenize queryString as our indexed tokens */
     var queryTokens = this.tokenize(queryString);
 
-    // Check and compare
+    /* Check and compare */
     if (this.indexedFiles[fileName]) {
 
-      // Initialize the search result the current file with JSON name as the key
+      /* Initialize the search result the current file with JSON name as the key */
       this.searchResults[fileName] = {
         indexMap: {},
         documentsId: this.indexedFiles[fileName].documentsId
@@ -108,8 +122,6 @@ var Index = function() {
    * @param{String} queryString - The search query
    */
   this.searchIndex = function(file, queryString) {
-
-    // var that = this;
 
     if (file === "all") {
       Object.keys(this.indexedFiles).forEach(function(fileName) {

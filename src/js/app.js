@@ -14,37 +14,36 @@ var invertedIndex = angular.module("invertedIndex", [])
 .directive("fileUpload", function() {
   var directive = {};
 
-  // Restricts this directive to an HTML attribute
+  /* Restricts this directive to an HTML attribute */
   directive.restrict = "A";
 
-  // Require ngModel for input data binding
+  /* Require ngModel for input data binding */
   directive.require = "ngModel";
 
-  // Link to the HTML elememt
+  /* Link to the HTML elememt */
   directive.link = function(scope, element, attributes, ngModel) {
 
-    // File reader instance for reading the JSON file
+    /* File reader instance for reading the JSON file */
     var reader = new FileReader();
     var upload;
     var fileContents;
 
 
-    // Bind a change to the elememt
-    element.bind('change', function(event) {
+    /* Bind a change to the elememt */
+    element.bind("change", function(event) {
       upload = event.target.files[0];
 
-      // Check if uploaded file was JSON
-      if (upload.name.indexOf('json') >= 0) {
+      /* Check if uploaded file was JSON */
+      if (upload.name.indexOf("json") >= 0) {
         var fileName = upload.name;
         reader.readAsText(upload);
       } else {
-        console.log("This is not a JSON file");
+        alert("This is not a JSON file. Please try again");
       }
     });
 
     reader.onload = function(e) {
       fileContents = e.target.result;
-      // console.log(fileContents);
 
       /*
        * Set filecontents to the ngModel in order to be
@@ -67,7 +66,7 @@ var invertedIndex = angular.module("invertedIndex", [])
 /*
  * Controller for the inverted index
  * @param{String} ivIndexCtrl - Name of the Controller
- * @param{function} callback - with Controller dependecies
+ * @param{function} function - with Controller dependecies
  */
 .controller("ivIndexCtrl", function($scope, $timeout) {
 
@@ -76,14 +75,13 @@ var invertedIndex = angular.module("invertedIndex", [])
    */
   var index = new Index();
 
-  // Keeps track of uploaded files as wells their names
+  /* Keeps track of uploaded files as wells their names */
   $scope.mappedContent = {};
   $scope.docsId = [];
 
   $scope.verifyFileUpload = function() {
-    // console.log($scope.file);
 
-    // Copies the name and JSON docs to mappedContent
+    /* Copies the name and JSON docs to mappedContent */
     $timeout(function() {
       $scope.mappedContent[$scope.file.name] = angular.copy($scope.file);
     });
