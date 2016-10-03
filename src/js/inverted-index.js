@@ -57,7 +57,7 @@ var Index = function() {
         titleTokens = this.tokenize(item.title);
         textTokens = this.tokenize(item.text);
       } else {
-        return alert("Document " + indexNum + ": Invalid JSON document. It should have text and title");
+        return alert("Document " + indexNum + ":  Invalid JSON document. It should have text and title");
       }
 
 
@@ -83,6 +83,15 @@ var Index = function() {
 
     /* Update the indexed files records */
     this.indexedFiles[fileName] = indexedFileContents;
+  };
+
+  /*
+   * The getIndex method returns an object of the correct
+   * index mapping
+   * @param{String} fileName - fileName in which the index map is to be returned
+   */
+  this.getIndex = function(fileName) {
+    return this.indexedFiles[fileName].indexMap;
   };
 
   /*
