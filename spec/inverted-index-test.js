@@ -84,6 +84,11 @@ describe("Iverted Index Object", function() {
     it("should verify that keys are mapped to the correct docs", function() {
       expect(index.indexedFiles["books.json"].indexMap.of).toEqual([0, 1, 2]);
     });
+
+    it("should verify that documents indices are populated into documentsId", function() {
+      expect(index.indexedFiles["books.json"].documentsId).toBeTruthy();
+      expect(index.indexedFiles["books.json"].documentsId.length).toEqual(3);
+    });
   });
 
   /*
