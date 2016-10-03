@@ -45,9 +45,21 @@ var Index = function() {
 
     fileContents.forEach(function(item, indexNum) {
 
-      /* Tokenize both title and text */
-      var titleTokens = this.tokenize(item.title);
-      var textTokens = this.tokenize(item.text);
+      var titleTokens;
+      var textTokens;
+
+      /*
+       * Check if each document in the JSON file
+       * has a title and text.
+       */
+      if (item.title && item.text) {
+        /* Tokenize both title and text */
+        titleTokens = this.tokenize(item.title);
+        textTokens = this.tokenize(item.text);
+      } else {
+        return alert("Document " + indexNum + ": Invalid JSON document. It should have text and title");
+      }
+
 
       /* Merged array of both titleTokens and textTokens */
       var tokens = titleTokens.concat(textTokens);
@@ -74,7 +86,8 @@ var Index = function() {
   };
 
   /*
-   * Searches a particular file in the indexedFiles and returns an array of index where a search tokens are found
+   * Searches a particular file in the indexedFiles and returns an
+   * array of index where a search tokens are found
    * @param{String} fileName - This specifies which you would like to search
    * @param{String} queryString - This is the search query which is what is to be searched
    */
