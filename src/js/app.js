@@ -34,7 +34,7 @@ var invertedIndex = angular.module("invertedIndex", [])
       upload = event.target.files[0];
 
       /* Check if uploaded file was JSON */
-      if (upload.name.indexOf("json") >= 0) {
+      if (upload.name.match(/\.json$/g)) {
         var fileName = upload.name;
         reader.readAsText(upload);
       } else {
