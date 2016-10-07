@@ -51,7 +51,7 @@ var invertedIndex = angular.module("invertedIndex", [])
        */
       ngModel.$setViewValue({
         name: upload.name,
-        docs: scope.$eval(reader.result)
+        docs: scope.$eval(fileContents)
       });
 
       if (attributes.checkFileUpload) {
