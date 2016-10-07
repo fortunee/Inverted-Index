@@ -75,7 +75,7 @@
 
                 <!-- Uploaded files that is to be indexed -->
                 <div class="col-md-4">
-                    <div class="createIndex" ng-repeat="(key, value) in mappedContent">
+                    <div class="createIndex" ng-repeat="(key, value) in jsonFileObj">
                         {{ value.name }}
                         <button class="btn btn-info pull-right btn-createIndex" ng-click="createIndex(value.name, value.docs)">Create Index</button>
                     </div>
@@ -91,13 +91,13 @@
                         <table class="table">
                             <thead>
                                 <th>TERMS</th>
-                                <th ng-repeat="id in indexed.documentsId">DOC {{ id }}</th>
+                                <th ng-repeat="id in indexed.docIndexNum">DOC {{ id }}</th>
                             </thead>
 
                             <tbody>
                                 <tr ng-repeat="(term, sourceIndexNums) in indexed.indexMap">
                                     <td>{{ term }} {{ sourceIndexNums }}</td>
-                                    <td ng-repeat="(key, val) in indexed.documentsId">
+                                    <td ng-repeat="(key, val) in indexed.docIndexNum">
                                         {{sourceIndexNums.includes(val) ? 'YES': 'NO'}}
                                     </td>
                                 </tr>
@@ -123,13 +123,13 @@
                         <table class="table">
                             <thead>
                                 <th>TERMS</th>
-                                <th ng-repeat="id in indexed.documentsId">DOC {{ id }}</th>
+                                <th ng-repeat="id in indexed.docIndexNum">DOC {{ id }}</th>
                             </thead>
 
                             <tbody>
                                 <tr ng-repeat="(term, sourceIndexNums) in indexed.indexMap">
                                     <td>{{ term }} {{ sourceIndexNums }}</td>
-                                    <td ng-repeat="(key, val) in indexed.documentsId">
+                                    <td ng-repeat="(key, val) in indexed.docIndexNum">
                                         {{sourceIndexNums.includes(val) ? 'YES': 'NO'}}
                                     </td>
                                 </tr>

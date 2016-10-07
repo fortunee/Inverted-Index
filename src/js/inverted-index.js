@@ -34,9 +34,9 @@ var Index = function() {
     };
 
     /* Gets index number of each document in the JSON object */
-    indexedFileContents.documentsId = (function() {
+    indexedFileContents.docIndexNum = (function() {
       var documents = [];
-      
+
       fileContents.forEach(function(item, indexNum){
         documents.push(indexNum);
       });
@@ -113,15 +113,15 @@ var Index = function() {
       /* Initialize the search result the current file with JSON name as the key */
       this.searchResults[fileName] = {
         indexMap: {},
-        documentsId: this.indexedFiles[fileName].documentsId
+        docIndexNum: this.indexedFiles[fileName].docIndexNum
       };
 
 
-      queryTokens.forEach(function(qToken) {
-        if (this.indexedFiles[fileName].indexMap[qToken]) {
-          this.searchResults[fileName].indexMap[qToken] = this.indexedFiles[fileName].indexMap[qToken];
+      queryTokens.forEach(function(queryToken) {
+        if (this.indexedFiles[fileName].indexMap[queryToken]) {
+          this.searchResults[fileName].indexMap[queryToken] = this.indexedFiles[fileName].indexMap[queryToken];
         } else {
-          return alert(qToken + " is not found anywhere");
+          return alert(queryToken + " is not found anywhere");
         }
 
       }.bind(this));

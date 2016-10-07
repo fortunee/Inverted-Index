@@ -76,16 +76,15 @@ var invertedIndex = angular.module("invertedIndex", [])
   var index = new Index();
 
   /* Keeps track of uploaded files as wells their names */
-  $scope.mappedContent = {};
-  $scope.docsId = [];
+  $scope.jsonFileObj = {};
 
   $scope.verifyFileUpload = function() {
 
-    /* Copies the name and JSON docs to mappedContent */
+    /* Copies the name and JSON docs to jsonFileObj */
     $timeout(function() {
-      $scope.mappedContent[$scope.file.name] = angular.copy($scope.file);
+      $scope.jsonFileObj[$scope.file.name] = angular.copy($scope.file);
     });
-    console.log($scope.mappedContent);
+    console.log($scope.jsonFileObj);
   };
 
   /*
