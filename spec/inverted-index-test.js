@@ -7,20 +7,20 @@ var index = new Index();
  * Mock JSON files for the test suites
  */
 var books = [{
-     "title": "Alice in Wonderland alice",
-     "text": "Alice Alice Alice Alice falls into a rabbit hole and enters a world full of imagination."
-   },
+    "title": "Alice in Wonderland alice",
+    "text": "Alice Alice Alice Alice falls into a rabbit hole and enters a world full of imagination."
+  },
 
-   {
-     "title": "The Lord of the Rings: The Fellowship of the Ring.",
-     "text": "An alice unusual alliance of man, elf, dwarf dwarf, wizard and hobbit seek to destroy a powerful ring."
-   },
+  {
+    "title": "The Lord of the Rings: The Fellowship of the Ring.",
+    "text": "An alice unusual alliance of man, elf, dwarf dwarf, wizard and hobbit seek to destroy a powerful ring."
+  },
 
-   {
-     "title": "King of kings",
-     "text": "Jesus Christ is the King of kings and Lord of lords alice"
-   }
- ];
+  {
+    "title": "King of kings",
+    "text": "Jesus Christ is the King of kings and Lord of lords alice"
+  }
+];
 
 
 var files = [{
@@ -67,6 +67,23 @@ describe("Iverted Index Object", function() {
   });
 
   /*
+   * Test suite to ensure that words in the Array are unique
+   * once they are passed to the uniqueWords method
+   */
+  describe("Get unique words in the Array", function() {
+
+    var arr = ["hello", "world", "world", "world", "this", "is", "all", "this", "is", "all"];
+
+    it("Should return and array of words passed to it", function() {
+      expect(Array.isArray(index.uniqueWords(arr))).toBeTruthy();
+    });
+
+    it("Should remove all duplicate words", function() {
+      expect(index.uniqueWords(arr)).toEqual(["hello", "world", "this", "is", "all"]);
+    });
+  });
+
+  /*
    * Test suite to ensure the index is populated
    * when the createIndex method is called with the
    * file name and the JSON documents is passed
@@ -103,7 +120,7 @@ describe("Iverted Index Object", function() {
    * Test suite to ensure the getIndex method returns an object of
    * the correct index mapping
    */
-  describe("Get index", function () {
+  describe("Get index", function() {
 
     beforeEach(function() {
       index.createIndex("books.json", books);

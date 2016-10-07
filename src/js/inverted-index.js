@@ -69,7 +69,7 @@ var Index = function() {
       /* Merged array of both titleTokens and textTokens */
       var tokens = titleTokens.concat(textTokens);
 
-      /* Get unique words from in tokens */
+      /* Get unique words from tokens */
       tokens = this.uniqueWords(tokens);
 
       /* Set each token as a property indexedFileContents with array value
@@ -108,13 +108,13 @@ var Index = function() {
     /* Tokenize queryString as our indexed tokens */
     var queryTokens = this.tokenize(queryString);
 
-    /* Get unique words from in tokens */
+    /* Get unique words from the queryTokens */
     queryTokens = this.uniqueWords(queryTokens);
 
     /* Check and compare */
     if (this.indexedFiles[fileName]) {
 
-      /* Initialize the search result the current file with JSON name as the key */
+      /* Initialize the search result the current file using the fileName as the key */
       this.searchResults[fileName] = {
         indexMap: {},
         docIndexNum: this.indexedFiles[fileName].docIndexNum
