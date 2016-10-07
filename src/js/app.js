@@ -65,10 +65,10 @@ var invertedIndex = angular.module("invertedIndex", [])
 
 /*
  * Controller for the inverted index
- * @param{String} ivIndexCtrl - Name of the Controller
+ * @param{String} invertedIndexCtrl - Name of the Controller
  * @param{function} function - with Controller dependecies
  */
-.controller("ivIndexCtrl", function($scope, $timeout) {
+.controller("invertedIndexCtrl", function($scope, $timeout) {
 
   /*
    * Instance of Index Object and indexedFiles
