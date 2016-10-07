@@ -22,6 +22,16 @@ var Index = function() {
   };
 
   /*
+   * FIlters an array in an alphabetical order and get unique words
+   * @param{Array} arr - The array to be filtered
+   */
+  this.uniqueWords = function(arr) {
+    return arr.filter(function(item, pos) {
+      return arr.indexOf(item) === pos;
+    });
+  };
+
+  /*
    * Creates the index of a JSON file and updates it in the indexedFiles
    * @param{String} fileName - The name of the JSON file that is to be created
    * @param{Array} fileContents - The contents of the JSON file that is to be created
@@ -59,10 +69,8 @@ var Index = function() {
       /* Merged array of both titleTokens and textTokens */
       var tokens = titleTokens.concat(textTokens);
 
-      /* FIlter Merged array to order and get unique words */
-      tokens = tokens.filter(function(token, pos) {
-        return tokens.indexOf(token) === pos;
-      });
+      /* Get unique words from in tokens */
+      tokens = this.uniqueWords(tokens);
 
       /* Set each token as a property indexedFileContents with array value
        * of index number where they appear.
@@ -99,6 +107,9 @@ var Index = function() {
 
     /* Tokenize queryString as our indexed tokens */
     var queryTokens = this.tokenize(queryString);
+
+    /* Get unique words from in tokens */
+    queryTokens = this.uniqueWords(queryTokens);
 
     /* Check and compare */
     if (this.indexedFiles[fileName]) {
