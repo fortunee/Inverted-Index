@@ -44,7 +44,6 @@ describe("Iverted Index Object", function() {
    * Test suite to read book data
    */
   describe("Read book data", function() {
-
     it("should not be empty", function() {
       /* Can't read a file that hasn't be uploaded yet */
     });
@@ -55,10 +54,15 @@ describe("Iverted Index Object", function() {
    * and an array of words is returned
    */
   describe("Tokenize words", function() {
-    var str = "Hello world, this is ALL";
+
+    var str = "Hello world, @this is ALL...////";
+
     it("Should return and array of words passed to it", function() {
-      expect(index.tokenize(str)).toEqual(["hello", "world", "this", "is", "all"]);
       expect(Array.isArray(index.tokenize(str))).toBeTruthy();
+    });
+
+    it("Should remove all special characters", function() {
+      expect(index.tokenize(str)).toEqual(["hello", "world", "this", "is", "all"]);
     });
   });
 
@@ -88,9 +92,11 @@ describe("Iverted Index Object", function() {
     });
 
     it("should verify that documents indices are populated into docIndexNum", function() {
-      expect(index.indexedFiles["books.json"].docIndexNum).toBeTruthy();
+      expect(Array.isArray(index.indexedFiles["books.json"].docIndexNum)).toBeTruthy();
+      expect(index.indexedFiles["books.json"].docIndexNum).not.toBe(null);
       expect(index.indexedFiles["books.json"].docIndexNum.length).toEqual(3);
     });
+
   });
 
   /*
@@ -117,6 +123,7 @@ describe("Iverted Index Object", function() {
    * the search query is contained.
    */
   describe("Search index", function() {
+
     beforeEach(function() {
       index.createIndex("books.json", books);
       index.createIndex("files.json", files);
@@ -126,6 +133,7 @@ describe("Iverted Index Object", function() {
     it("should return an array of indices of the documents", function() {
       expect(index.searchResults["books.json"].indexMap.alice).toEqual([0, 1, 2]);
       expect(index.searchResults["files.json"].indexMap.alice).toEqual([1]);
+      expect(Array.isArray(index.searchResults["files.json"].indexMap.alice)).toBeTruthy();
     });
 
   });
@@ -136,6 +144,7 @@ describe("Iverted Index Object", function() {
    * indices the search query is contained.
    */
   describe("Search index of a single JSON file", function() {
+
     beforeEach(function() {
       index.createIndex("books.json", books);
       index.createIndex("files.json", files);

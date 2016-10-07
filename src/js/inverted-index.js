@@ -18,7 +18,7 @@ var Index = function() {
    * @param{String} str - String to be tokonized
    */
   this.tokenize = function(str) {
-    return str.replace(/[.,\/#!$%\^&\*;:'{}=\-_`~()]/g, "").trim().toLowerCase().split(" ");
+    return str.replace(/[.,\/#!$%\^&@\*;:'{}=\-_`~()]/g, "").trim().toLowerCase().split(" ");
   };
 
   /*
