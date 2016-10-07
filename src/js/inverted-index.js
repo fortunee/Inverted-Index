@@ -34,16 +34,9 @@ var Index = function() {
     };
 
     /* Gets index number of each document in the JSON object */
-    indexedFileContents.docIndexNum = (function() {
-      var documents = [];
-
-      fileContents.forEach(function(item, indexNum){
-        documents.push(indexNum);
-      });
-
-      return documents;
-    })();
-
+    indexedFileContents.docIndexNum = fileContents.map(function(item, indexNum) {
+      return indexNum;
+    });
 
     fileContents.forEach(function(item, indexNum) {
 
