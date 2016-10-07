@@ -119,7 +119,7 @@ var Index = function() {
         if (this.indexedFiles[fileName].indexMap[qToken]) {
           this.searchResults[fileName].indexMap[qToken] = this.indexedFiles[fileName].indexMap[qToken];
         } else {
-          return console.log(qToken + " is not found anywhere");
+          return alert(qToken + " is not found anywhere");
         }
 
       }.bind(this));

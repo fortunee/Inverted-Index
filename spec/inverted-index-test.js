@@ -7,20 +7,20 @@ var index = new Index();
  * Mock JSON files for the test suites
  */
 var books = [{
-    "title": "Alice in Wonderland alice",
-    "text": "Alice Alice Alice Alice falls into a rabbit hole and enters a world full of imagination."
-  },
+     "title": "Alice in Wonderland alice",
+     "text": "Alice Alice Alice Alice falls into a rabbit hole and enters a world full of imagination."
+   },
 
-  {
-    "title": "The Lord of the Rings: The Fellowship of the Ring.",
-    "text": "An alice unusual alliance of man, elf, dwarf dwarf, wizard and hobbit seek to destroy a powerful ring."
-  },
+   {
+     "title": "The Lord of the Rings: The Fellowship of the Ring.",
+     "text": "An alice unusual alliance of man, elf, dwarf dwarf, wizard and hobbit seek to destroy a powerful ring."
+   },
 
-  {
-    "title": "King of kings",
-    "text": "Jesus Christ is the King of kings and Lord of lords alice"
-  }
-];
+   {
+     "title": "King of kings",
+     "text": "Jesus Christ is the King of kings and Lord of lords alice"
+   }
+ ];
 
 
 var files = [{
@@ -58,6 +58,7 @@ describe("Iverted Index Object", function() {
     var str = "Hello world, this is ALL";
     it("Should return and array of words passed to it", function() {
       expect(index.tokenize(str)).toEqual(["hello", "world", "this", "is", "all"]);
+      expect(Array.isArray(index.tokenize(str))).toBeTruthy();
     });
   });
 
@@ -74,6 +75,7 @@ describe("Iverted Index Object", function() {
 
     it("should populate the index", function() {
       expect(index.indexedFiles["books.json"].indexMap.alice).toBeTruthy();
+      expect(Array.isArray(index.indexedFiles["books.json"].indexMap.alice)).toBeTruthy();
     });
 
     it("should verify that index is created", function() {
@@ -104,6 +106,7 @@ describe("Iverted Index Object", function() {
     it("should verify that the correct object of index map is returned", function() {
       expect(index.getIndex("books.json")).not.toBe(null);
       expect(typeof index.getIndex("books.json")).toBe("object");
+      expect(!Array.isArray(index.getIndex("books.json"))).toBeTruthy();
     });
   });
 
@@ -140,6 +143,7 @@ describe("Iverted Index Object", function() {
     });
 
     it("should return an array of indices of the documents", function() {
+      expect(Array.isArray(index.searchResults["files.json"].indexMap.a)).toBeTruthy();
       expect(index.searchResults["files.json"].indexMap.a).toEqual([1]);
       expect(index.searchResults["books.json"].indexMap.a).toBeFalsy();
     });
