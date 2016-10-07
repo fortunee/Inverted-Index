@@ -41,11 +41,11 @@
 
     <div class="container" ng-controller="invertedIndexCtrl">
 
-         <!-- Upload button and search bar -->
+        <!-- Upload button and search bar -->
         <div class="row">
             <!-- Uplaod buton -->
             <label class="btn btn-success btn-file col-md-2">
-        Upload <input type="file" style="display: none;" file-upload="json" ng-model="file" check-file-upload="verifyFileUpload()">
+        Upload <input type="file" style="display: none;" file-upload="json" ng-model="file" check-file-upload="saveFileObj()">
       </label>
             <!-- Uplaod buton ends -->
 
@@ -113,33 +113,33 @@
         <!-- /container -->
 
         <!-- <div class="container"> -->
-            <div class="row innerResultDisplay">
-                <!-- Search Result view -->
-                <div class="col-md-12 builtIndex" ng-show="searchResults">
+        <div class="row innerResultDisplay">
+            <!-- Search Result view -->
+            <div class="col-md-12 builtIndex" ng-show="searchResults">
 
-                    <div class="" ng-repeat="(name, indexed) in searchResults">
-                        <h4 class="text-center">SEARCH RESULTS FOR {{ name | uppercase }} </h4>
-                        <!-- search index results table  -->
-                        <table class="table">
-                            <thead>
-                                <th>TERMS</th>
-                                <th ng-repeat="id in indexed.docIndexNum">DOC {{ id }}</th>
-                            </thead>
+                <div class="" ng-repeat="(name, indexed) in searchResults">
+                    <h4 class="text-center">SEARCH RESULTS FOR {{ name | uppercase }} </h4>
+                    <!-- search index results table  -->
+                    <table class="table">
+                        <thead>
+                            <th>TERMS</th>
+                            <th ng-repeat="id in indexed.docIndexNum">DOC {{ id }}</th>
+                        </thead>
 
-                            <tbody>
-                                <tr ng-repeat="(term, sourceIndexNums) in indexed.indexMap">
-                                    <td>{{ term }} {{ sourceIndexNums }}</td>
-                                    <td ng-repeat="(key, val) in indexed.docIndexNum">
-                                        {{sourceIndexNums.includes(val) ? 'YES': 'NO'}}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <!-- /search index results table -->
-                    </div>
+                        <tbody>
+                            <tr ng-repeat="(term, sourceIndexNums) in indexed.indexMap">
+                                <td>{{ term }} {{ sourceIndexNums }}</td>
+                                <td ng-repeat="(key, val) in indexed.docIndexNum">
+                                    {{sourceIndexNums.includes(val) ? 'YES': 'NO'}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /search index results table -->
                 </div>
-                <!-- /Search Result view -->
             </div>
+            <!-- /Search Result view -->
+        </div>
         <!-- </div> -->
 
 

@@ -78,7 +78,7 @@ var invertedIndex = angular.module("invertedIndex", [])
   /* Keeps track of uploaded files as wells their names */
   $scope.jsonFileObj = {};
 
-  $scope.verifyFileUpload = function() {
+  $scope.saveFileObj = function() {
 
     /* Copies the name and JSON docs to jsonFileObj */
     $timeout(function() {
