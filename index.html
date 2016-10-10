@@ -75,19 +75,22 @@
 
                 <!-- Uploaded files that is to be indexed -->
                 <div id="mySidenav" class="col-md-1 sidenav">
+
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+                    <p class="welcome-note">Please Upload a JSON file</p>
                     <div class="createIndex" ng-repeat="(key, value) in jsonFileObj">
                         {{ value.name }}
                         <button class="btn btn-info pull-right btn-createIndex" ng-click="createIndex(value.name, value.docs)" ng-disabled="indexedFiles[key]">Create Index</button>
                     </div>
                 </div>
 
-                <span type="button" onclick="openNav()" class="col-md-1 glyphicon glyphicon-list"></span>
+                <span type="button" onclick="openNav()" onmouseover="closeNav()" class="col-md-1 glyphicon glyphicon-list"></span>
                 <!-- indexed files view -->
                 <div class="col-md-5 builtIndex" id="builtIndex" ng-show="indexedFiles">
 
                     <div class="" ng-repeat="(name, indexed) in indexedFiles">
-                        <h4 class="text-center">{{ name | uppercase }} </h4>
+                        <h4 class="text-center h4">{{ name | uppercase }} </h4>
 
                         <!-- created index table  -->
                         <table class="table">
@@ -100,7 +103,7 @@
                                 <tr ng-repeat="(term, sourceIndexNums) in indexed.indexMap">
                                     <td>{{ term }}</td>
                                     <td ng-repeat="(key, val) in indexed.docIndexNum">
-                                        {{sourceIndexNums.includes(val) ? 'YES': 'NO'}}
+                                        {{sourceIndexNums.includes(val) ? 'yes': 'no'}}
                                     </td>
                                 </tr>
                             </tbody>
@@ -114,7 +117,7 @@
                 <div class="col-md-5 builtIndex" ng-show="searchResults">
 
                     <div class="" ng-repeat="(name, indexed) in searchResults">
-                        <h4 class="text-center">SEARCH RESULTS FOR {{ name | uppercase }} </h4>
+                        <h4 class="text-center h4">SEARCH RESULTS FOR {{ name | uppercase }} </h4>
                         <!-- search index results table  -->
                         <table class="table">
                             <thead>
@@ -126,7 +129,7 @@
                                 <tr ng-repeat="(term, sourceIndexNums) in indexed.indexMap">
                                     <td>{{ term }}</td>
                                     <td ng-repeat="(key, val) in indexed.docIndexNum">
-                                        {{sourceIndexNums.includes(val) ? 'YES': 'NO'}}
+                                        {{sourceIndexNums.includes(val) ? 'yes': 'no'}}
                                     </td>
                                 </tr>
                             </tbody>

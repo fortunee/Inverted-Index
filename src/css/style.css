@@ -73,11 +73,16 @@ body{
 /* */
 .glyphicon-list{
   color: white;
-  font-size: 3em;
+  font-size: 2em;
   cursor: pointer;
   margin-right:18px;
+  text-shadow: 1px 2px 5px slateblue;
 }
 
+.welcome-note{
+  color: #fff;
+  padding: 10px;
+}
 /*Side bar menu ends*/
 .createIndex{
   background: rgba(0, 0, 1, .5);
@@ -100,6 +105,10 @@ body{
   overflow: auto;
   background: rgba(0, 0, 1, .5);
   color: #fff;
+}
+
+.h4{
+  text-shadow: 1px 2px 5px slateblue;
 }
 
 /*Footer style*/
