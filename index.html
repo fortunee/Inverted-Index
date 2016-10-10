@@ -98,7 +98,7 @@
 
                             <tbody>
                                 <tr ng-repeat="(term, sourceIndexNums) in indexed.indexMap">
-                                    <td>{{ term }} {{ sourceIndexNums }}</td>
+                                    <td>{{ term }}</td>
                                     <td ng-repeat="(key, val) in indexed.docIndexNum">
                                         {{sourceIndexNums.includes(val) ? 'YES': 'NO'}}
                                     </td>
@@ -124,7 +124,7 @@
 
                             <tbody>
                                 <tr ng-repeat="(term, sourceIndexNums) in indexed.indexMap">
-                                    <td>{{ term }} {{ sourceIndexNums }}</td>
+                                    <td>{{ term }}</td>
                                     <td ng-repeat="(key, val) in indexed.docIndexNum">
                                         {{sourceIndexNums.includes(val) ? 'YES': 'NO'}}
                                     </td>
