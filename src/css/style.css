@@ -24,7 +24,7 @@ body{
 /* The side navigation menu */
 .sidenav {
   height: 490px;
-  width: 0; /* 0 width - change this with JavaScript */
+  width: 250px; /* 250 width - change this with JavaScript */
   z-index: 1;
   background-color: #0e2438;
   overflow-x: hidden; /* Disable horizontal scroll */
