@@ -45,7 +45,8 @@ describe("Iverted Index Object", function() {
    */
   describe("Read book data", function() {
     it("should not be empty", function() {
-      /* Can't read a file that hasn't be uploaded yet */
+      expect(files).not.toBe(null);
+      expect(books.length > 0).toBeTruthy();
     });
   });
 
