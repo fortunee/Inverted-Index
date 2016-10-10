@@ -71,18 +71,20 @@
 
 
         <div class="container">
-            <div class="row innerResultDisplay">
+            <div class="  innerResultDisplay">
 
                 <!-- Uploaded files that is to be indexed -->
-                <div class="col-md-4">
+                <div id="mySidenav" class="col-md-1 sidenav">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                     <div class="createIndex" ng-repeat="(key, value) in jsonFileObj">
                         {{ value.name }}
                         <button class="btn btn-info pull-right btn-createIndex" ng-click="createIndex(value.name, value.docs)" ng-disabled="indexedFiles[key]">Create Index</button>
                     </div>
                 </div>
 
+                <span type="button" onclick="openNav()" onmouseover="closeNav()" class="col-md-1 glyphicon glyphicon-list"></span>
                 <!-- indexed files view -->
-                <div class="col-md-8 builtIndex" ng-show="indexedFiles">
+                <div class="col-md-5 builtIndex" id="builtIndex" ng-show="indexedFiles">
 
                     <div class="" ng-repeat="(name, indexed) in indexedFiles">
                         <h4 class="text-center">{{ name | uppercase }} </h4>
@@ -90,7 +92,7 @@
                         <!-- created index table  -->
                         <table class="table">
                             <thead>
-                                <th>TERMS</th>
+                                <th>TOKENS</th>
                                 <th ng-repeat="id in indexed.docIndexNum">DOC {{ id }}</th>
                             </thead>
 
@@ -107,40 +109,36 @@
                     </div>
                 </div>
                 <!-- /indexed files view -->
+
+                <!-- Search Result view -->
+                <div class="col-md-5 builtIndex" ng-show="searchResults">
+
+                    <div class="" ng-repeat="(name, indexed) in searchResults">
+                        <h4 class="text-center">SEARCH RESULTS FOR {{ name | uppercase }} </h4>
+                        <!-- search index results table  -->
+                        <table class="table">
+                            <thead>
+                                <th>TOKENS</th>
+                                <th ng-repeat="id in indexed.docIndexNum">DOC {{ id }}</th>
+                            </thead>
+
+                            <tbody>
+                                <tr ng-repeat="(term, sourceIndexNums) in indexed.indexMap">
+                                    <td>{{ term }} {{ sourceIndexNums }}</td>
+                                    <td ng-repeat="(key, val) in indexed.docIndexNum">
+                                        {{sourceIndexNums.includes(val) ? 'YES': 'NO'}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- /search index results table -->
+                    </div>
+                </div>
+                <!-- /Search Result view -->
             </div>
             <!-- /innerResultDisplay -->
         </div>
         <!-- /container -->
-
-        <!-- <div class="container"> -->
-        <div class="row innerResultDisplay">
-            <!-- Search Result view -->
-            <div class="col-md-12 builtIndex" ng-show="searchResults">
-
-                <div class="" ng-repeat="(name, indexed) in searchResults">
-                    <h4 class="text-center">SEARCH RESULTS FOR {{ name | uppercase }} </h4>
-                    <!-- search index results table  -->
-                    <table class="table">
-                        <thead>
-                            <th>TERMS</th>
-                            <th ng-repeat="id in indexed.docIndexNum">DOC {{ id }}</th>
-                        </thead>
-
-                        <tbody>
-                            <tr ng-repeat="(term, sourceIndexNums) in indexed.indexMap">
-                                <td>{{ term }} {{ sourceIndexNums }}</td>
-                                <td ng-repeat="(key, val) in indexed.docIndexNum">
-                                    {{sourceIndexNums.includes(val) ? 'YES': 'NO'}}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <!-- /search index results table -->
-                </div>
-            </div>
-            <!-- /Search Result view -->
-        </div>
-        <!-- </div> -->
 
 
     </div>
@@ -155,6 +153,21 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="src/js/inverted-index.js"></script>
+
+    <!--Slide uploaded files -->
+    <script>
+        /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("builtIndex").style.marginLeft = "0";
+        }
+
+        /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("builtIndex").style.marginLeft = "0";
+        }
+    </script>
 </body>
 
 </html>
