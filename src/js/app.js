@@ -7,9 +7,10 @@ var invertedIndex = angular.module("invertedIndex", [])
 
 
 /*
- * File upload custom directive which handles the uploaded file
+ * File upload custom directive which reads the uploaded file
+ * and passes it to the invertedIndex controller
  * @param{String} ngFileUpload - Name of the custom directive
- * @param{Function} callback - callback for custom directive
+ * @param{Function}
  */
 .directive("fileUpload", function() {
   var directive = {};
@@ -33,7 +34,7 @@ var invertedIndex = angular.module("invertedIndex", [])
     element.bind("change", function(event) {
       upload = event.target.files[0];
 
-      /* Check if uploaded file was JSON */
+      /* Check if uploaded file is a JSON */
       if (upload.name.match(/\.json$/g)) {
         var fileName = upload.name;
         reader.readAsText(upload);
@@ -47,7 +48,7 @@ var invertedIndex = angular.module("invertedIndex", [])
 
       /*
        * Set filecontents to the ngModel in order to be
-       * accessible with a scope controller
+       * accessible within the scope controller
        */
       ngModel.$setViewValue({
         name: upload.name,
@@ -71,42 +72,40 @@ var invertedIndex = angular.module("invertedIndex", [])
 .controller("invertedIndexCtrl", function($scope, $timeout) {
 
   /*
-   * Instance of Index Object and indexedFiles
+   * Instance of Index Object
    */
   var index = new Index();
 
-  /* Keeps track of uploaded files as wells their names */
+  /* Keep track of uploaded files */
   $scope.jsonFileObj = {};
 
   $scope.saveFileObj = function() {
 
-    /* Copies the name and JSON docs to jsonFileObj */
+    /* Copies the file name and docs into jsonFileObj */
     $timeout(function() {
       $scope.jsonFileObj[$scope.file.name] = angular.copy($scope.file);
     });
-    console.log($scope.jsonFileObj);
+
   };
 
   /*
-   * Create index function
+   * Create index scope function
    * @param{String} fileName - Name of current JSON file
    * @param{Array} docs - An array of JSON documents
    */
   $scope.createIndex = function(fileName, docs) {
     index.createIndex(fileName, docs);
     $scope.indexedFiles = index.indexedFiles;
-    console.log($scope.indexedFiles);
   };
 
   /*
-   * Search Index function
+   * Search Index scope function
    * @param{String} file -The file(s) to be searched
    * @param{String} queryString -The search query
    */
   $scope.searchIndex = function(file, queryString) {
     index.searchIndex(file, queryString);
     $scope.searchResults = index.searchResults;
-    console.log($scope.searchResults);
   };
 
 });
