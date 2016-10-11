@@ -2,8 +2,9 @@
 
 /*
  * Index Class
- * It creates an index of the contents of a json file
- * It searches through the created index
+ * It creates an index of a title and a text in a json file
+ * It also searches through the created index and returns the jsons documents
+ * index position of which a word is a found.
  */
 var Index = function() {
 
@@ -14,7 +15,8 @@ var Index = function() {
   this.searchResults = {};
 
   /*
-   * Returns an array of terms/words from the given strings
+   * This returns an array of tokens/words from the given strings
+   * after removing special characters and white spaces
    * @param{String} str - String to be tokonized
    */
   this.tokenize = function(str) {
@@ -22,7 +24,7 @@ var Index = function() {
   };
 
   /*
-   * FIlters an array in an alphabetical order and get unique words
+   * Filters an array in an alphabetical order and gets unique words from it
    * @param{Array} arr - The array to be filtered
    */
   this.uniqueWords = function(arr) {
@@ -32,7 +34,7 @@ var Index = function() {
   };
 
   /*
-   * Creates the index of a JSON file and updates it in the indexedFiles
+   * Creates the index and updates the indexedFiles
    * @param{String} fileName - The name of the JSON file that is to be created
    * @param{Array} fileContents - The contents of the JSON file that is to be created
    */
@@ -72,8 +74,8 @@ var Index = function() {
       /* Get unique words from tokens */
       tokens = this.uniqueWords(tokens);
 
-      /* Set each token as a property indexedFileContents with array value
-       * of index number where they appear.
+      /* Set each token as a property indexMap of indexedFileContents with an array value
+       * of the index number of the current document where it appears.
        */
       tokens.forEach(function(token) {
         if (!indexedFileContents.indexMap.hasOwnProperty(token)) {
@@ -91,7 +93,7 @@ var Index = function() {
   /*
    * The getIndex method returns an object of the correct
    * index mapping
-   * @param{String} fileName - fileName in which the index map is to be returned
+   * @param{String} fileName - fileName for which its index map is to be returned
    */
   this.getIndex = function(fileName) {
     return this.indexedFiles[fileName].indexMap;
@@ -99,16 +101,16 @@ var Index = function() {
 
   /*
    * Searches a particular file in the indexedFiles and returns an
-   * array of index where a search tokens are found
-   * @param{String} fileName - This specifies which you would like to search
-   * @param{String} queryString - This is the search query which is what is to be searched
+   * array of index where a search token is found
+   * @param{String} fileName - This specifies file which you would like to search
+   * @param{String} queryString - This is the search query
    */
   this.searchFile = function(fileName, queryString) {
 
-    /* Tokenize queryString as our indexed tokens */
+    /* Tokenize queryString to be as indexed tokens */
     var queryTokens = this.tokenize(queryString);
 
-    /* Get unique words from the queryTokens */
+    /* Get only unique words from the queryTokens */
     queryTokens = this.uniqueWords(queryTokens);
 
     /* Check and compare */
@@ -125,7 +127,7 @@ var Index = function() {
         if (this.indexedFiles[fileName].indexMap[queryToken]) {
           this.searchResults[fileName].indexMap[queryToken] = this.indexedFiles[fileName].indexMap[queryToken];
         } else {
-          return alert(queryToken + " is not found anywhere");
+          return alert("The word " + queryToken + " is not found in " + fileName);
         }
 
       }.bind(this));
@@ -134,7 +136,7 @@ var Index = function() {
   };
 
   /*
-   * This searches all files
+   * This allows a user to search through a specific file or all files
    * @param{String} file - The file name to be searched which could be "all"
    * @param{String} queryString - The search query
    */
