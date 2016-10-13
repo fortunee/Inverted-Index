@@ -4,7 +4,7 @@ var browserSync = require("browser-sync");
 
 gulp.task("app", ["serve", "test"]);
 
-gulp.task("serve", function() {
+gulp.task("serve", function () {
   var browser1 = browserSync.create();
   browser1.init({
     server: {
@@ -18,7 +18,7 @@ gulp.task("serve", function() {
   gulp.watch(["*.html", "src/js/*.js", "src/css/*.css"]).on("change", browser1.reload);
 });
 
-gulp.task("test", function() {
+gulp.task("test", function () {
   var browser2 = browserSync.create();
   browser2.init({
     server: {
