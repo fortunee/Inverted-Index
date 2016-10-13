@@ -6,7 +6,7 @@
  * It also searches through the created index and returns the jsons documents
  * index position of which a word is a found.
  */
-var Index = function() {
+var Index = function () {
 
   /** This will keep track of the indexed JSON files */
   this.indexedFiles = {};
@@ -19,7 +19,7 @@ var Index = function() {
    * after removing special characters and white spaces
    * @param{String} str - String to be tokonized
    */
-  this.tokenize = function(str) {
+  this.tokenize = function (str) {
     return str.replace(/[.,\/#!$%\^&@\*;:'{}=\-_`~()]/g, "").trim().toLowerCase().split(" ");
   };
 
@@ -27,8 +27,8 @@ var Index = function() {
    * Filters an array in an alphabetical order and gets unique words from it
    * @param{Array} arr - The array to be filtered
    */
-  this.uniqueWords = function(arr) {
-    return arr.filter(function(item, pos) {
+  this.uniqueWords = function (arr) {
+    return arr.filter(function (item, pos) {
       return arr.indexOf(item) === pos;
     });
   };
@@ -38,7 +38,7 @@ var Index = function() {
    * @param{String} fileName - The name of the JSON file that is to be created
    * @param{Array} fileContents - The contents of the JSON file that is to be created
    */
-  this.createIndex = function(fileName, fileContents) {
+  this.createIndex = function (fileName, fileContents) {
 
     /** This will contain the indexed file contents */
     var indexedFileContents = {
@@ -46,11 +46,11 @@ var Index = function() {
     };
 
     /** Gets index number of each document in the JSON object */
-    indexedFileContents.docIndexNum = fileContents.map(function(item, indexNum) {
+    indexedFileContents.docIndexNum = fileContents.map(function (item, indexNum) {
       return indexNum;
     });
 
-    fileContents.forEach(function(item, indexNum) {
+    fileContents.forEach(function (item, indexNum) {
 
       var titleTokens;
       var textTokens;
@@ -77,7 +77,7 @@ var Index = function() {
       /** Set each token as a property indexMap of indexedFileContents with an array value
        * of the index number of the current document where it appears.
        */
-      tokens.forEach(function(token) {
+      tokens.forEach(function (token) {
         if (!indexedFileContents.indexMap.hasOwnProperty(token)) {
           indexedFileContents.indexMap[token] = [indexNum];
         } else {
@@ -95,7 +95,7 @@ var Index = function() {
    * index mapping
    * @param{String} fileName - fileName for which its index map is to be returned
    */
-  this.getIndex = function(fileName) {
+  this.getIndex = function (fileName) {
     return this.indexedFiles[fileName].indexMap;
   };
 
@@ -105,7 +105,7 @@ var Index = function() {
    * @param{String} fileName - This specifies file which you would like to search
    * @param{String} queryString - This is the search query
    */
-  this.searchFile = function(fileName, queryString) {
+  this.searchFile = function (fileName, queryString) {
 
     /** Tokenize queryString to be as indexed tokens */
     var queryTokens = this.tokenize(queryString);
@@ -123,7 +123,7 @@ var Index = function() {
       };
 
 
-      queryTokens.forEach(function(queryToken) {
+      queryTokens.forEach(function (queryToken) {
         if (this.indexedFiles[fileName].indexMap[queryToken]) {
           this.searchResults[fileName].indexMap[queryToken] = this.indexedFiles[fileName].indexMap[queryToken];
         } else {
@@ -140,10 +140,10 @@ var Index = function() {
    * @param{String} file - The file name to be searched which could be "all"
    * @param{String} queryString - The search query
    */
-  this.searchIndex = function(file, queryString) {
+  this.searchIndex = function (file, queryString) {
 
     if (file === "all") {
-      Object.keys(this.indexedFiles).forEach(function(fileName) {
+      Object.keys(this.indexedFiles).forEach(function (fileName) {
         this.searchFile(fileName, queryString);
       }.bind(this));
     } else {

@@ -38,13 +38,13 @@ var files = [{
 /**
  * Inverted index test suit
  */
-describe("Iverted Index Object", function() {
+describe("Iverted Index Object", function () {
 
   /**
    * Test suite to read book data
    */
-  describe("Read book data", function() {
-    it("should not be empty", function() {
+  describe("Read book data", function () {
+    it("should not be empty", function () {
       expect(files).not.toBe(null);
       expect(books.length > 0).toBeTruthy();
     });
@@ -54,15 +54,15 @@ describe("Iverted Index Object", function() {
    * Test suite to ensure that a string is properly tokenized
    * and an array of words is returned
    */
-  describe("Tokenize words", function() {
+  describe("Tokenize words", function () {
 
     var str = "Hello world, @this is ALL...////";
 
-    it("Should return and array of words passed to it", function() {
+    it("Should return and array of words passed to it", function () {
       expect(Array.isArray(index.tokenize(str))).toBeTruthy();
     });
 
-    it("Should remove all special characters", function() {
+    it("Should remove all special characters", function () {
       expect(index.tokenize(str)).toEqual(["hello", "world", "this", "is", "all"]);
     });
   });
@@ -71,15 +71,15 @@ describe("Iverted Index Object", function() {
    * Test suite to ensure that words in the Array are unique
    * once they are passed to the uniqueWords method
    */
-  describe("Get unique words in the Array", function() {
+  describe("Get unique words in the Array", function () {
 
     var arr = ["hello", "world", "world", "world", "this", "is", "all", "this", "is", "all"];
 
-    it("Should return and array of words passed to it", function() {
+    it("Should return and array of words passed to it", function () {
       expect(Array.isArray(index.uniqueWords(arr))).toBeTruthy();
     });
 
-    it("Should remove all duplicate words", function() {
+    it("Should remove all duplicate words", function () {
       expect(index.uniqueWords(arr)).toEqual(["hello", "world", "this", "is", "all"]);
     });
   });
@@ -89,27 +89,27 @@ describe("Iverted Index Object", function() {
    * when the createIndex method is called with the
    * file name and the JSON documents is passed
    */
-  describe("Populate Index", function() {
+  describe("Populate Index", function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       index.createIndex("books.json", books);
     });
 
-    it("should populate the index", function() {
+    it("should populate the index", function () {
       expect(index.indexedFiles["books.json"].indexMap.alice).toBeTruthy();
       expect(Array.isArray(index.indexedFiles["books.json"].indexMap.alice)).toBeTruthy();
     });
 
-    it("should verify that index is created", function() {
+    it("should verify that index is created", function () {
       expect(index.indexedFiles["books.json"].indexMap.alice)
         .toEqual([0, 1, 2]);
     });
 
-    it("should verify that keys are mapped to the correct docs", function() {
+    it("should verify that keys are mapped to the correct docs", function () {
       expect(index.indexedFiles["books.json"].indexMap.of).toEqual([0, 1, 2]);
     });
 
-    it("should verify that documents indices are populated into docIndexNum", function() {
+    it("should verify that documents indices are populated into docIndexNum", function () {
       expect(Array.isArray(index.indexedFiles["books.json"].docIndexNum)).toBeTruthy();
       expect(index.indexedFiles["books.json"].docIndexNum).not.toBe(null);
       expect(index.indexedFiles["books.json"].docIndexNum.length).toEqual(3);
@@ -121,13 +121,13 @@ describe("Iverted Index Object", function() {
    * Test suite to ensure the getIndex method returns an object of
    * the correct index mapping
    */
-  describe("Get index", function() {
+  describe("Get index", function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       index.createIndex("books.json", books);
     });
 
-    it("should verify that the correct object of index map is returned", function() {
+    it("should verify that the correct object of index map is returned", function () {
       expect(index.getIndex("books.json")).not.toBe(null);
       expect(typeof index.getIndex("books.json")).toBe("object");
       expect(!Array.isArray(index.getIndex("books.json"))).toBeTruthy();
@@ -140,15 +140,15 @@ describe("Iverted Index Object", function() {
    * or a file name is passed and returns an array of indices
    * the search query is contained.
    */
-  describe("Search index", function() {
+  describe("Search index", function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       index.createIndex("books.json", books);
       index.createIndex("files.json", files);
       index.searchIndex("all", "alice in Wonderland");
     });
 
-    it("should return an array of indices of the documents", function() {
+    it("should return an array of indices of the documents", function () {
       expect(index.searchResults["books.json"].indexMap.alice).toEqual([0, 1, 2]);
       expect(index.searchResults["files.json"].indexMap.alice).toEqual([1]);
       expect(Array.isArray(index.searchResults["files.json"].indexMap.alice)).toBeTruthy();
@@ -161,15 +161,15 @@ describe("Iverted Index Object", function() {
    * file provided the file name is passed and return and array of
    * indices the search query is contained.
    */
-  describe("Search index of a single JSON file", function() {
+  describe("Search index of a single JSON file", function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       index.createIndex("books.json", books);
       index.createIndex("files.json", files);
       index.searchFile("files.json", "appreciated a lot");
     });
 
-    it("should return an array of indices of the documents", function() {
+    it("should return an array of indices of the documents", function () {
       expect(Array.isArray(index.searchResults["files.json"].indexMap.a)).toBeTruthy();
       expect(index.searchResults["files.json"].indexMap.a).toEqual([1]);
       expect(index.searchResults["books.json"].indexMap.a).toBeFalsy();

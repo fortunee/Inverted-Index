@@ -12,7 +12,7 @@ var invertedIndex = angular.module("invertedIndex", [])
  * @param{String} ngFileUpload - Name of the custom directive
  * @param{Function}
  */
-.directive("fileUpload", function() {
+.directive("fileUpload", function () {
   var directive = {};
 
   /** Restricts this directive to an HTML attribute */
@@ -22,7 +22,7 @@ var invertedIndex = angular.module("invertedIndex", [])
   directive.require = "ngModel";
 
   /** Link to the HTML elememt */
-  directive.link = function(scope, element, attributes, ngModel) {
+  directive.link = function (scope, element, attributes, ngModel) {
 
     /** File reader instance for reading the JSON file */
     var reader = new FileReader();
@@ -31,7 +31,7 @@ var invertedIndex = angular.module("invertedIndex", [])
 
 
     /** Bind a change to the elememt */
-    element.bind("change", function(event) {
+    element.bind("change", function (event) {
       upload = event.target.files[0];
 
       /** Check if uploaded file is a JSON */
@@ -43,7 +43,7 @@ var invertedIndex = angular.module("invertedIndex", [])
       }
     });
 
-    reader.onload = function(e) {
+    reader.onload = function (e) {
       fileContents = e.target.result;
 
       /**
@@ -69,7 +69,7 @@ var invertedIndex = angular.module("invertedIndex", [])
  * @param{String} invertedIndexCtrl - Name of the Controller
  * @param{function} function - with Controller dependecies
  */
-.controller("invertedIndexCtrl", function($scope, $timeout) {
+.controller("invertedIndexCtrl", function ($scope, $timeout) {
 
   /**
    * Instance of Index Object
@@ -79,7 +79,7 @@ var invertedIndex = angular.module("invertedIndex", [])
   /** Keep track of uploaded files */
   $scope.jsonFileObj = {};
 
-  $scope.saveFileObj = function() {
+  $scope.saveFileObj = function () {
 
     /** Copies the file name and docs into jsonFileObj */
     $timeout(function() {
@@ -93,7 +93,7 @@ var invertedIndex = angular.module("invertedIndex", [])
    * @param{String} fileName - Name of current JSON file
    * @param{Array} docs - An array of JSON documents
    */
-  $scope.createIndex = function(fileName, docs) {
+  $scope.createIndex = function (fileName, docs) {
     index.createIndex(fileName, docs);
     $scope.indexedFiles = index.indexedFiles;
   };
@@ -103,7 +103,7 @@ var invertedIndex = angular.module("invertedIndex", [])
    * @param{String} file -The file(s) to be searched
    * @param{String} queryString -The search query
    */
-  $scope.searchIndex = function(file, queryString) {
+  $scope.searchIndex = function (file, queryString) {
     index.searchIndex(file, queryString);
     $scope.searchResults = index.searchResults;
   };
