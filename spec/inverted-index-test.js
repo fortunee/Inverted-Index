@@ -1,9 +1,9 @@
 "use strict";
 
-/* Instance of index Object */
+/** Instance of index Object */
 var index = new Index();
 
-/*
+/**
  * Mock JSON files for the test suites
  */
 var books = [{
@@ -35,12 +35,12 @@ var files = [{
 ];
 
 
-/*
+/**
  * Inverted index test suit
  */
 describe("Iverted Index Object", function() {
 
-  /*
+  /**
    * Test suite to read book data
    */
   describe("Read book data", function() {
@@ -50,7 +50,7 @@ describe("Iverted Index Object", function() {
     });
   });
 
-  /*
+  /**
    * Test suite to ensure that a string is properly tokenized
    * and an array of words is returned
    */
@@ -67,7 +67,7 @@ describe("Iverted Index Object", function() {
     });
   });
 
-  /*
+  /**
    * Test suite to ensure that words in the Array are unique
    * once they are passed to the uniqueWords method
    */
@@ -84,7 +84,7 @@ describe("Iverted Index Object", function() {
     });
   });
 
-  /*
+  /**
    * Test suite to ensure the index is populated
    * when the createIndex method is called with the
    * file name and the JSON documents is passed
@@ -117,7 +117,7 @@ describe("Iverted Index Object", function() {
 
   });
 
-  /*
+  /**
    * Test suite to ensure the getIndex method returns an object of
    * the correct index mapping
    */
@@ -134,7 +134,7 @@ describe("Iverted Index Object", function() {
     });
   });
 
-  /*
+  /**
    * Test suite to ensure the search index can search all
    * uploaded JSON files or a particular file provide "all"
    * or a file name is passed and returns an array of indices
@@ -156,7 +156,7 @@ describe("Iverted Index Object", function() {
 
   });
 
-  /*
+  /**
    * Test suite to ensure the search file can search a particular
    * file provided the file name is passed and return and array of
    * indices the search query is contained.
