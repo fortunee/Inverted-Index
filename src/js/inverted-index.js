@@ -134,7 +134,7 @@ var Index = function () {
         if (this.indexedFiles[fileName].indexMap[queryToken]) {
           this.searchResults[fileName].indexMap[queryToken] = this.indexedFiles[fileName].indexMap[queryToken];
         } else {
-          return alert("The word " + queryToken + " is not found in " + fileName);
+          this.searchResults[fileName].indexMap[queryToken] = [];
         }
 
       }.bind(this));
