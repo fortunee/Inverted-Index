@@ -153,7 +153,7 @@ var Index = function () {
     queryString = queryString.split("#")[0];
 
     /** Search the specified file */
-    if (Object.keys(this.indexedFiles).includes(file)) {
+    if (Object.keys(this.indexedFiles).indexOf(file) !== -1) {
       this.searchFile(file, queryString);
     } else {
       /** Search all files */
