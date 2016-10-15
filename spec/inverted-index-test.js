@@ -34,6 +34,12 @@ var files = [{
   }
 ];
 
+var empty = [{}];
+var wrong = [{
+  "t": "title",
+  "d": "desv"
+}];
+
 
 /**
  * Inverted index test suit
@@ -47,6 +53,18 @@ describe("Iverted Index Object", function () {
     it("should not be empty", function () {
       expect(files).not.toBe(null);
       expect(books.length > 0).toBeTruthy();
+    });
+
+    it("Should throw an error if a json file is empty or badly formatted", function () {
+      expect(function () {
+        index.createIndex("empty.json", empty);
+      }).toThrow(new Error("Invalid JSON file! Please ensure it is properly formatted and try again. Thank you"));
+    });
+
+    it("Should ensure that all docs have a title and text property", function () {
+      expect(function () {
+        index.createIndex("wrong.json", wrong);
+      }).toThrow(new Error("Invalid JSON file! Please ensure it is properly formatted and try again. Thank you"));
     });
   });
 

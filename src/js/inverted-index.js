@@ -68,7 +68,7 @@ var Index = function () {
           titleTokens = this.tokenize(item.title);
           textTokens = this.tokenize(item.text);
         } else {
-          return alert("Document " + indexNum + " should have text and title");
+          alert("Document " + indexNum + " should have text and title");
         }
 
 
@@ -93,7 +93,9 @@ var Index = function () {
       /** Update the indexed files records */
       this.indexedFiles[fileName] = indexedFileContents;
     } catch (e) {
-      alert("Invalid JSON file! Please ensure it is properly formatted and try again. Thank you");
+      var errorMsg = "Invalid JSON file! Please ensure it is properly formatted and try again. Thank you";
+      alert(errorMsg);
+      throw new Error(errorMsg);
     }
   };
 
