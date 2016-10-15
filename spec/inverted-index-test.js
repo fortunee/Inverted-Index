@@ -145,11 +145,15 @@ describe("Iverted Index Object", function () {
     beforeEach(function () {
       index.createIndex("books.json", books);
       index.createIndex("files.json", files);
-      index.searchIndex("all", "alice in Wonderland");
+      index.searchIndex("alice in Wonderland#books.json");
+      index.searchIndex("alice in Wonderland#files.json");
+      index.searchIndex("alice in Wonderland#all");
     });
 
     it("should return an array of indices of the documents", function () {
       expect(index.searchResults["books.json"].indexMap.alice).toEqual([0, 1, 2]);
+      expect(index.searchResults["books.json"].indexMap.in).toEqual([0]);
+      expect(index.searchResults["books.json"].indexMap.wonderland).toEqual([0]);
       expect(index.searchResults["files.json"].indexMap.alice).toEqual([1]);
       expect(Array.isArray(index.searchResults["files.json"].indexMap.alice)).toBeTruthy();
     });
