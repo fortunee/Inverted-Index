@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Sat Sep 24 2016 22:47:29 GMT+0100 (WAT)
+// Generated on Sat Oct 15 2016 13:36:16 GMT+0100 (WAT)
 
 module.exports = function (config) {
   config.set({
@@ -15,10 +15,8 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'node_modules/angular/angular.js',
-      'node_modules/angular-mocks/angular-mocks.js',
       'src/js/inverted-index.js',
-      'spec/*.js'
+      'spec/inverted-index-test.js'
     ],
 
 
@@ -43,7 +41,6 @@ module.exports = function (config) {
       type: 'lcov',
       dir: 'coverage/'
     },
-
 
     // web server port
     port: 9876,
