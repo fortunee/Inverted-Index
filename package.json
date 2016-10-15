@@ -18,7 +18,6 @@
   "homepage": "https://github.com/andela-efortune/Inverted-Index#readme",
   "devDependencies": {
     "angular": "^1.5.8",
-    "angular-mocks": "^1.5.8",
     "browser-sync": "^2.16.0",
     "coveralls": "^2.11.14",
     "gulp": "^3.9.1",
