@@ -20,7 +20,7 @@ var Index = function () {
    * @param{String} str - String to be tokonized
    */
   this.tokenize = function (str) {
-    return str.replace(/[.,\/#!$%\^&@\*;:'{}=\-_`~()]/g, "").trim().toLowerCase().split(" ");
+    return str.replace(/[.,\/#!$%\^&@\*?;:'{}=\-_`~()]/g, "").trim().toLowerCase().split(" ");
   };
 
   /**
@@ -134,7 +134,7 @@ var Index = function () {
         if (this.indexedFiles[fileName].indexMap[queryToken]) {
           this.searchResults[fileName].indexMap[queryToken] = this.indexedFiles[fileName].indexMap[queryToken];
         } else {
-          return alert("The word " + queryToken + " is not found in " + fileName);
+          this.searchResults[fileName].indexMap[queryToken] = [];
         }
 
       }.bind(this));
@@ -144,17 +144,23 @@ var Index = function () {
 
   /**
    * This allows a user to search through a specific file or all files
-   * @param{String} file - The file name to be searched which could be "all"
-   * @param{String} queryString - The search query
+   * @param{String} queryString - Search query
    */
-  this.searchIndex = function (file, queryString) {
+  this.searchIndex = function (queryString) {
 
-    if (file === "all") {
+    /** Split by the hash separator to get the file name and the queryString */
+    var file = queryString.split("#")[1];
+    queryString = queryString.split("#")[0];
+
+    /** Search the specified file */
+    if (Object.keys(this.indexedFiles).includes(file)) {
+      this.searchFile(file, queryString);
+    } else {
+      /** Search all files */
       Object.keys(this.indexedFiles).forEach(function (fileName) {
         this.searchFile(fileName, queryString);
       }.bind(this));
-    } else {
-      this.searchFile(file, queryString);
     }
+
   };
 };

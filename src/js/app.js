@@ -104,7 +104,13 @@ var invertedIndex = angular.module("invertedIndex", [])
    * @param{String} queryString -The search query
    */
   $scope.searchIndex = function (file, queryString) {
-    index.searchIndex(file, queryString);
+
+    /**
+     * Concatenate the file to be searched to the queryString
+     * and pass it to the search index method
+     */
+    queryString = queryString + "#" + file;
+    index.searchIndex(queryString);
     $scope.searchResults = index.searchResults;
   };
 
