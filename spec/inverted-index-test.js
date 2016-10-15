@@ -34,6 +34,12 @@ var files = [{
   }
 ];
 
+var empty = [{}];
+var wrong = [{
+  "t": "title",
+  "d": "desv"
+}];
+
 
 /**
  * Inverted index test suit
@@ -47,6 +53,18 @@ describe("Iverted Index Object", function () {
     it("should not be empty", function () {
       expect(files).not.toBe(null);
       expect(books.length > 0).toBeTruthy();
+    });
+
+    it("Should throw an error if a json file is empty or badly formatted", function () {
+      expect(function () {
+        index.createIndex("empty.json", empty);
+      }).toThrow(new Error("Invalid JSON file! Please ensure it is properly formatted and try again. Thank you"));
+    });
+
+    it("Should ensure that all docs have a title and text property", function () {
+      expect(function () {
+        index.createIndex("wrong.json", wrong);
+      }).toThrow(new Error("Invalid JSON file! Please ensure it is properly formatted and try again. Thank you"));
     });
   });
 
@@ -145,11 +163,15 @@ describe("Iverted Index Object", function () {
     beforeEach(function () {
       index.createIndex("books.json", books);
       index.createIndex("files.json", files);
-      index.searchIndex("all", "alice in Wonderland");
+      index.searchIndex("alice in Wonderland#books.json");
+      index.searchIndex("alice in Wonderland#files.json");
+      index.searchIndex("alice in Wonderland#all");
     });
 
     it("should return an array of indices of the documents", function () {
       expect(index.searchResults["books.json"].indexMap.alice).toEqual([0, 1, 2]);
+      expect(index.searchResults["books.json"].indexMap.in).toEqual([0]);
+      expect(index.searchResults["books.json"].indexMap.wonderland).toEqual([0]);
       expect(index.searchResults["files.json"].indexMap.alice).toEqual([1]);
       expect(Array.isArray(index.searchResults["files.json"].indexMap.alice)).toBeTruthy();
     });
