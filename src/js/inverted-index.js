@@ -8,10 +8,10 @@
  */
 var Index = function () {
 
-  /** This will keep track of the indexed JSON files */
+  // This will keep track of the indexed JSON files
   this.indexedFiles = {};
 
-  /** This will contain the search results */
+  // This will contain the search results
   this.searchResults = {};
 
   /**
@@ -44,12 +44,15 @@ var Index = function () {
      * Ensure that the uploaded JSON file is valid
      */
     try {
-      /** This will contain the indexed file contents */
+      // This will contain the indexed file contents
       var indexedFileContents = {
         indexMap: {}
       };
 
-      /** Gets index number of each document in the JSON object */
+      /** 
+       * Gets index number of each document in the 
+       * JSON object
+       */
       indexedFileContents.docIndexNum = fileContents.map(function (item, indexNum) {
         return indexNum;
       });
@@ -64,18 +67,18 @@ var Index = function () {
          * has a title and text.
          */
         if (item.title && item.text) {
-          /** Tokenize both title and text */
+          // Tokenize both title and text
           titleTokens = this.tokenize(item.title);
           textTokens = this.tokenize(item.text);
         } else {
-          alert("Document " + indexNum + " should have text and title");
+          throw "Document " + indexNum + " should have text and title";
         }
 
 
-        /** Merged array of both titleTokens and textTokens */
+        // Merged array of both titleTokens and textTokens
         var tokens = titleTokens.concat(textTokens);
 
-        /** Get unique words from tokens */
+        // Get unique words from tokens
         tokens = this.uniqueWords(tokens);
 
         /** Set each token as a property indexMap of indexedFileContents with an array value
@@ -90,11 +93,10 @@ var Index = function () {
         });
       }.bind(this));
 
-      /** Update the indexed files records */
+      // Update the indexed files records
       this.indexedFiles[fileName] = indexedFileContents;
     } catch (e) {
       var errorMsg = "Invalid JSON file! Please ensure it is properly formatted and try again. Thank you";
-      alert(errorMsg);
       throw new Error(errorMsg);
     }
   };
@@ -116,16 +118,19 @@ var Index = function () {
    */
   this.searchFile = function (fileName, queryString) {
 
-    /** Tokenize queryString to be as indexed tokens */
+    // Tokenize queryString to be as indexed tokens
     var queryTokens = this.tokenize(queryString);
 
-    /** Get only unique words from the queryTokens */
+    // Get only unique words from the queryTokens
     queryTokens = this.uniqueWords(queryTokens);
 
-    /** Check and compare */
+    // Check and compare
     if (this.indexedFiles[fileName]) {
 
-      /** Initialize the search result the current file using the fileName as the key */
+      /** 
+       * Initialize the search result the current file using 
+       * the fileName as the key 
+       */
       this.searchResults[fileName] = {
         indexMap: {},
         docIndexNum: this.indexedFiles[fileName].docIndexNum
@@ -150,15 +155,18 @@ var Index = function () {
    */
   this.searchIndex = function (queryString) {
 
-    /** Split by the hash separator to get the file name and the queryString */
+    /** 
+     * Split by the hash separator to get the file name 
+     * and the queryString 
+     */
     var file = queryString.split("#")[1];
     queryString = queryString.split("#")[0];
 
-    /** Search the specified file */
+    // Search the specified file
     if (Object.keys(this.indexedFiles).indexOf(file) !== -1) {
       this.searchFile(file, queryString);
     } else {
-      /** Search all files */
+      // Search all files
       Object.keys(this.indexedFiles).forEach(function (fileName) {
         this.searchFile(fileName, queryString);
       }.bind(this));
