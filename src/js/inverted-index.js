@@ -68,7 +68,7 @@ var Index = function () {
           titleTokens = this.tokenize(item.title);
           textTokens = this.tokenize(item.text);
         } else {
-          alert("Document " + indexNum + " should have text and title");
+          throw "Document " + indexNum + " should have text and title";
         }
 
 
