@@ -1,0 +1,3 @@
+node_modules/**/*.js
+spec/jasmine-2.3.3/*.js
+karma.conf.js

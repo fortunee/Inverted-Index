@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html ng-app="invertedIndex" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inverted Index</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+
+    <link rel="stylesheet" href="src/css/style.css" />
+
+    <!-- Angular -->
+    <script src="/node_modules/angular/angular.js"></script>
+    <script src="/src/js/app.js"></script>
+</head>
+
+<body>
+    <!-- Header goes here-->
+    <header>
+        <nav class="navbar navbar-inverse navbar-static-top no-margin" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mobile-display" aria-expanded="false">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                </button>
+                    <a href="/" class="navbar-brand">
+                        <strong id="logo"><em>Inverted</em>Index</strong>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Header tag ends here -->
+
+
+    <div class="container" ng-controller="invertedIndexCtrl">
+
+        <!-- Upload button and search bar -->
+        <div class="row">
+            <!-- Uplaod buton -->
+            <label class="btn btn-success btn-file col-md-2">
+        Upload <input type="file" style="display: none;" file-upload="json" ng-model="file" check-file-upload="saveFileObj()">
+      </label>
+            <!-- Uplaod buton ends -->
+
+            <div class="col-md-10">
+
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="query">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Search
+                    <span class="caret"></span>
+                  </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a ng-click="searchIndex('all', query)">All files</a></li>
+                            <li ng-repeat="(key, value) in indexedFiles" ng-click="searchIndex(key, query)"><a href="#">{{ key }}</a></li>
+                        </ul>
+                    </div>
+                    <!-- /btn-group -->
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="  innerResultDisplay">
+
+                <!-- Uploaded files that is to be indexed -->
+                <div id="mySidenav" class="col-md-1 sidenav">
+
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+                    <p class="welcome-note">Please Upload a JSON file</p>
+                    <div class="createIndex" ng-repeat="(key, value) in jsonFileObj">
+                        {{ value.name }}
+                        <button class="btn btn-info pull-right btn-createIndex" ng-click="createIndex(value.name, value.docs)" ng-disabled="indexedFiles[key]">Create Index</button>
+                    </div>
+                </div>
+
+                <span type="button" onclick="openNav()" onmouseover="openNav()" class="col-md-1 glyphicon glyphicon-list"></span>
+                <!-- indexed files view -->
+                <div class="col-md-5 builtIndex" id="builtIndex" ng-show="indexedFiles">
+
+                    <div class="" ng-repeat="(name, indexed) in indexedFiles">
+                        <h4 class="text-center h4">{{ name | uppercase }} </h4>
+
+                        <!-- created index table  -->
+                        <table class="table">
+                            <thead>
+                                <th>TOKENS</th>
+                                <th ng-repeat="id in indexed.docIndexNum">DOC {{ id }}</th>
+                            </thead>
+
+                            <tbody>
+                                <tr ng-repeat="(term, sourceIndexNums) in indexed.indexMap">
+                                    <td>{{ term }}</td>
+                                    <td ng-repeat="(key, val) in indexed.docIndexNum">
+                                        {{sourceIndexNums.includes(val) ? 'yes': 'no'}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- /created index table -->
+                    </div>
+                </div>
+                <!-- /indexed files view -->
+
+                <!-- Search Result view -->
+                <div class="col-md-5 builtIndex" ng-show="searchResults">
+
+                    <div class="" ng-repeat="(name, indexed) in searchResults">
+                        <h4 class="text-center h4">SEARCH RESULTS FOR {{ name | uppercase }} </h4>
+                        <!-- search index results table  -->
+                        <table class="table">
+                            <thead>
+                                <th>TOKENS</th>
+                                <th ng-repeat="id in indexed.docIndexNum">DOC {{ id }}</th>
+                            </thead>
+
+                            <tbody>
+                                <tr ng-repeat="(term, sourceIndexNums) in indexed.indexMap">
+                                    <td>{{ term }}</td>
+                                    <td ng-repeat="(key, val) in indexed.docIndexNum">
+                                        {{sourceIndexNums.includes(val) ? 'yes': 'no'}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- /search index results table -->
+                    </div>
+                </div>
+                <!-- /Search Result view -->
+            </div>
+            <!-- /innerResultDisplay -->
+        </div>
+        <!-- /container -->
+
+
+    </div>
+
+    <!-- Footer -->
+    <hr>
+    <footer class="text-center footerstyle">
+        <p>&copy; 2016 invertedIndex, Inc.</p>
+    </footer>
+
+    <!-- libs and dependencies -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="src/js/inverted-index.js"></script>
+
+    <!--Slide uploaded files -->
+    <script>
+        /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("builtIndex").style.marginLeft = "0";
+        }
+
+        /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("builtIndex").style.marginLeft = "0";
+        }
+    </script>
+</body>
+
+</html>
