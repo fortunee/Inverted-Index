@@ -1,6 +1,7 @@
 "use strict";
 var gulp = require("gulp");
 var browserSync = require("browser-sync");
+var connect = require("gulp-connect");
 
 gulp.task("app", ["serve", "test"]);
 
@@ -31,4 +32,11 @@ gulp.task("test", function () {
     }
   });
   gulp.watch(["*.html", "src/js/*.js", "spec/*.js"]).on("change", browser2.reload);
+});
+
+gulp.task('serveprod', function() {
+  connect.server({
+    root: "./",
+    port: process.env.PORT || 5000 // localhost:5000
+  });
 });
