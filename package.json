@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "node_modules/karma/bin/karma start karma.conf.js --single-run",
-    "start": "node_modules/gulp/bin/gulp.js app"
+    "start": "node_modules/gulp/bin/gulp.js app",
+    "heroku-postbuild": "gulp"
   },
   "repository": {
     "type": "git",
