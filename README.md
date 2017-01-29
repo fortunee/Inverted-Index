@@ -1,7 +1,7 @@
 # Checkpoint One: Inverted Index
 [![Build Status](https://travis-ci.org/andela-efortune/Inverted-Index.svg?branch=ch-test-refactor)](https://travis-ci.org/andela-efortune/Inverted-Index) [![Coverage Status](https://coveralls.io/repos/github/andela-efortune/Inverted-Index/badge.svg?branch=develop)](https://coveralls.io/github/andela-efortune/Inverted-Index?branch=develop)
 
-This is a simple inverted index application that allows a user upload JSON files asynchronously, create an index of each uploaded JSON file, provided it has the properties of a `title` and a `text`, and also search through the indexed files.
+This is a simple inverted index application that allows a user upload JSON files asynchronously, create an index of each uploaded JSON file, provided it has the properties of a `title` and a `text`, and also search through the indexed files. See demo [here](https://iv-index.herokuapp.com/)
 
 ####Inspired By
 * [TIA](https://andela.com/)
