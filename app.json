@@ -1,0 +1,7 @@
+{
+  "name": "Inverted-Index",
+  "description": "A simple inverted index application",
+  "repository": "https://github.com/andela-efortune/Inverted-Index",
+  "keywords": ["Fortune","Ikechukwu","Ekeruo","andela","software", "inverted-index", "inverted", "index", "elastic search"],
+  "image": "heroku/nodejs"
+}
