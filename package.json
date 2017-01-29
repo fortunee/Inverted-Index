@@ -9,7 +9,7 @@
   "scripts": {
     "test": "node_modules/karma/bin/karma start karma.conf.js --single-run",
     "start": "node_modules/gulp/bin/gulp.js app",
-    "heroku-postbuild": "gulp"
+    "postinstall": "gulp app"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
     "url": "https://github.com/andela-efortune/Inverted-Index/issues"
   },
   "homepage": "https://github.com/andela-efortune/Inverted-Index#readme",
-  "devDependencies": {
+  "dependencies": {
     "angular": "^1.5.8",
     "browser-sync": "^2.16.0",
     "coveralls": "^2.11.14",
