@@ -34,7 +34,7 @@ gulp.task("test", function () {
   gulp.watch(["*.html", "src/js/*.js", "spec/*.js"]).on("change", browser2.reload);
 });
 
-gulp.task('serveprod', function() {
+gulp.task("serveprod", function() {
   connect.server({
     root: "./",
     port: process.env.PORT || 5000 // localhost:5000
